@@ -1,0 +1,38 @@
+---
+import publications from "@/data/publications";
+import Resource from "@/components/Resource.astro";
+---
+
+<article class="flex flex-col gap-8">
+  <h3 class="blink text-lg text-neutral-100">Publications</h3>
+  <ol class="relative border-s border-neutral-700 dark:border-gray-700">
+    {
+      publications.map((pub, index) => (
+        <li class="mb-5 ms-4">
+          <p class="text-neutral-100">{pub.title}</p>
+          <p className="text-xs">
+            {pub.authors.map((author, index) => (
+              <span class="text-xs" key={index}>
+                {author === "Mai Nishimura" ? <u>{author}</u> : author}
+                {index < pub.authors.length - 1 && ", "}
+              </span>
+            ))}
+          </p>
+          <span class="text-xs">{pub.journal}</span>
+          {pub.abbrev && (
+            <>
+              <span class="text-xs text-orange-500">({pub.abbrev})</span>
+            </>
+          )}
+          {", "}
+          <time>{pub.year}</time>
+          <p>
+            {Object.entries(pub.links).map(([key, val]) => {
+              return <Resource label={key} url={val} />;
+            })}
+          </p>
+        </li>
+      ))
+    }
+  </ol>
+</article>

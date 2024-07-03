@@ -7,25 +7,19 @@ export type Project = {
 
 const projects: Project[] = [
   {
-    title: "Puppetfactory",
-    techs: ["Next.js", "TypeScript"],
-    link: "https://puppetfactory.app/",
+    title: "arxiv2notion",
+    techs: ["Chrome Extension", "Notion API"],
+    link: "https://github.com/denkiwakame/arxiv2notion",
   },
   {
-    title: "Script to generate Next.js project",
-    techs: ["Shell"],
-    link: "https://github.com/MaeWolff/create-nextjs-app-bash-script",
+    title: "academic-project-template",
+    techs: ["React", "UIKit"],
+    link: "https://denkiwakame.github.io/academic-project-template/",
   },
   {
-    title: "Dictionary App",
-    techs: ["Next.js", "react-query", "zod"],
+    title: "py-tiny-pkg",
+    techs: ["Python Packaging", "PEP links for my personal use"],
     link: "https://github.com/MaeWolff/dictionary-app",
-  },
-  {
-    title: "Portfolio / Template",
-    techs: ["Astro", "TypeScript"],
-    link: "https://github.com/MaeWolff/astro-portfolio-template",
-    isComingSoon: true,
   },
 ];
 

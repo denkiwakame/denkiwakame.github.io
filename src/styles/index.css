@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+
+.me {
+  font-family: "Monoton";
+}
+
+/* Heading */
+.blink {
+  font-family: "Consolas";
+  position: relative;
+  display: inline;
+}
+.blink::after {
+  content: "|";
+  animation: blink 1s step-start infinite;
+  position: absolute;
+  font-weight: bold;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Theme */
+.tile {
+  padding: 0px;
+  margin: 0px;
+}
+
+time {
+  @apply text-xs text-orange-500;
+}

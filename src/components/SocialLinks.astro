@@ -1,17 +1,19 @@
 ---
-import Link from "./shared/Link.astro";
 import presentation from "@/data/presentation";
+import { Icon } from "astro-icon/components";
 ---
 
 <ul role="list" class="flex flex-row gap-2">
   {
     presentation.socials.map((social, index) => (
       <>
-        <li>
-          <Link href={social.link} label={social.label} />
-        </li>
-
-        {presentation.socials.length - 1 !== index && <li>/</li>}
+        <a
+          href={social.link}
+          class:list={["hover:text-neutral-100 cursor-default"]}
+          target="_blank"
+        >
+          <Icon name={social.icon} size="2rem" />
+        </a>
       </>
     ))
   }
