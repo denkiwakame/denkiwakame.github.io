@@ -1,0 +1,39 @@
+---
+import presentation from "@/data/presentation";
+---
+
+<article class="flex flex-col gap-6">
+  <h3 class="blink text-lg text-neutral-100">Working Experiences</h3>
+  <ol class="relative border-s border-neutral-700 dark:border-gray-700">
+    {
+      presentation.experiences.map((experience, index) => (
+        <li class="mb-2 ms-4">
+          <p>
+            <span class="text-neutral-100">{experience.position}</span>
+            at
+            <span class="text-neutral-100">{experience.affiliation}</span>,
+            <time>{experience.year}</time>
+          </p>
+          <span class="text-xs">{experience.description}</span>
+        </li>
+      ))
+    }
+  </ol>
+</article>
+<article class="flex flex-col gap-6">
+  <h3 class="blink text-lg text-neutral-100">Education</h3>
+  <ol class="relative border-s border-neutral-700 dark:border-gray-700">
+    {
+      presentation.education.map((degree, index) => (
+        <li class="mb-2 ms-4">
+          <p>
+            <span class="text-neutral-100">{degree.degree}</span>
+            at
+            <span class="text-neutral-100">{degree.univ}</span>,
+            <time>{degree.year}</time>
+          </p>
+        </li>
+      ))
+    }
+  </ol>
+</article>
