@@ -19,7 +19,15 @@ const posts = (await getCollection("posts")).sort(function (first, second) {
 });
 ---
 
-<Layout>
+<Layout
+  title="denkiwakame.github.io"
+  description="Mai Nishimura"
+  og={{
+    image: "https://avatars.githubusercontent.com/u/1871262",
+    alt: "denkiwakame",
+    description: "Mai Nishimura",
+  }}
+>
   <main class="flex flex-col gap-20">
     <article
       class="flex flex-col gap-6 md:flex-row-reverse md:justify-end md:gap-12"
