@@ -19,7 +19,7 @@ const projects: Project[] = [
   {
     title: "py-tiny-pkg",
     techs: ["Python Packaging", "PEP links for my personal use"],
-    link: "https://github.com/MaeWolff/dictionary-app",
+    link: "https://github.com/denkiwakame/py-tiny-pkg",
   },
 ];
 
