@@ -14,7 +14,7 @@ const projects: Project[] = [
   {
     title: "academic-project-template",
     techs: ["React", "UIKit"],
-    link: "https://denkiwakame.github.io/academic-project-template/",
+    link: "https://github.com/denkiwakame/academic-project-template",
   },
   {
     title: "py-tiny-pkg",

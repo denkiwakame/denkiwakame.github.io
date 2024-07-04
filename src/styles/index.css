@@ -6,7 +6,7 @@
 
 /* Heading */
 .blink {
-  font-family: "Consolas";
+  font-family: Consolas, monaco, monospace;
   position: relative;
   display: inline;
 }
