@@ -1,11 +1,4 @@
-type Publication = {
-  authors: string[];
-  title: string;
-  year: string;
-  journal: string;
-  links: {};
-  abbrev?: string;
-};
+import { Publication } from "@/utils/types/data.ts";
 
 const publications: Publication[] = [
   {
@@ -17,6 +10,7 @@ const publications: Publication[] = [
     abbrev: "IROS",
     links: {
       paper: "https://arxiv.org/abs/2312.02008",
+      project: "https://omron-sinicx.github.io/mabr/",
     },
   },
   {
