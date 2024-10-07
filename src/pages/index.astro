@@ -13,6 +13,7 @@ import convertAsteriskToStrongTag from "@/utils/convertAsteriskToStrongTag";
 
 import presentation from "@/data/presentation";
 import projects from "@/data/projects";
+import entries from "@/data/entries";
 
 const posts = (await getCollection("posts")).sort(function (first, second) {
   return second.data.publishedAt.getTime() - first.data.publishedAt.getTime();
@@ -52,6 +53,18 @@ const posts = (await getCollection("posts")).sort(function (first, second) {
         {
           projects.length !== 0 &&
             projects.map((project) => <ProjectCard {...project} />)
+        }
+      </section>
+    </article>
+
+    <article class="flex flex-col gap-6">
+      <h3 class="blink text-lg text-neutral-100">Posts</h3>
+      {entries.length === 0 && <p>Oops, I must work^^^^^</p>}
+
+      <section class="flex flex-col gap-4">
+        {
+          entries.length !== 0 &&
+            entries.map((entry) => <ProjectCard {...entry} />)
         }
       </section>
     </article>
