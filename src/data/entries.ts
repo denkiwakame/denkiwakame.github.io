@@ -17,6 +17,11 @@ const entries: Entry[] = [
     techs: ["CUDA", "Pixi", "faiss", "conda", "PyPI"],
     link: "https://denkiwakame.notion.site/pixi-faiss-14c3175c6b6a80b39eebf2ab8eb7b05d",
   },
+  {
+     title: "Manageng Dotfiles by Rust Tools",
+     techs: ["Rust", "Pixi", "dotfiles", "nvim", "PyPI"],
+     link: "https://denkiwakame.notion.site/Shell-Tools-Rust-1693175c6b6a80319e06c71dea5162db",
+  },
 ];
 
 export default entries;
