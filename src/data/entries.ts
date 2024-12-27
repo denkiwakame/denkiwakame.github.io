@@ -19,7 +19,7 @@ const entries: Entry[] = [
   },
   {
      title: "Manageng Dotfiles by Rust Tools",
-     techs: ["Rust", "Pixi", "dotfiles", "nvim", "PyPI"],
+     techs: ["Rust", "Pixi", "dotfiles", "nvim"],
      link: "https://denkiwakame.notion.site/Shell-Tools-Rust-1693175c6b6a80319e06c71dea5162db",
   },
 ];
