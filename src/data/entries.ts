@@ -18,6 +18,11 @@ const entries: Entry[] = [
     link: "https://denkiwakame.notion.site/pixi-faiss-14c3175c6b6a80b39eebf2ab8eb7b05d",
   },
   {
+    title: "How to switch BLAS backends in numpy",
+    techs: ["Pixi", "faiss", "numpy", "conda-forge", "OpenBLAS", "MKL"],
+    link: "https://denkiwakame.notion.site/pixi-numpy-BLAS-backend-1783175c6b6a80a28886c0334f71e97f",
+  },
+  {
      title: "Manageng Dotfiles by Rust Tools",
      techs: ["Rust", "Pixi", "dotfiles", "nvim"],
      link: "https://denkiwakame.notion.site/Shell-Tools-Rust-1693175c6b6a80319e06c71dea5162db",
