@@ -27,6 +27,11 @@ const entries: Entry[] = [
      techs: ["Rust", "Pixi", "dotfiles", "nvim"],
      link: "https://denkiwakame.notion.site/Shell-Tools-Rust-1693175c6b6a80319e06c71dea5162db",
   },
+  {
+     title: "How to Report Progress Effectively"
+     techs: ["Research"],
+     link: https://denkiwakame.notion.site/625a3884f3fe4d888150788476c4e8f9
+  }
 ];
 
 export default entries;
