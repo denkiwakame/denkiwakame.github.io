@@ -30,7 +30,7 @@ const entries: Entry[] = [
   {
      title: "How to Report Progress Effectively",
      techs: ["Research"],
-     link: https://denkiwakame.notion.site/625a3884f3fe4d888150788476c4e8f9
+     link: "https://denkiwakame.notion.site/625a3884f3fe4d888150788476c4e8f9"
   }
 ];
 
