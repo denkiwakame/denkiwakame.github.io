@@ -70,24 +70,45 @@ const posts = (await getCollection("posts")).sort(function (first, second) {
     </article>
 
     <article class="flex flex-col gap-6">
-      <h3 class="blink text-lg text-neutral-100">Academic Service</h3>
+      <h3 class="blink text-lg text-neutral-100">Research Grants</h3>
       <ol class="relative border-s border-neutral-700 dark:border-gray-700">
         <li class="mb-2 ms-4">
-          <p class="text-neutral-100">Reviewer</p>
-          <span class="text-xs"
-            >ICCV 2023, CVPR 2023, IROS 2023-2024, ICRA 2024, TPAMI, WACV 2022,
-            ICPR 2022, 3DV 2020-2021, MVA 2021</span
-          >
+          <p class="text-neutral-100">
+            Japan Science and Technology Agency (JST), PREST :: PI
+          </p>
+          2025- "経験の蓄積と想起を司る自律型記憶基盤"
+        </li>
+      </ol>
+      <ol class="relative border-s border-neutral-700 dark:border-gray-700">
+        <li class="mb-2 ms-4">
+          <p class="text-neutral-100">
+            Japan Science and Technology Agency (JST), AIP Acceleration Research
+            :: Co-PI
+          </p>
+          2023-2026 "超高速データサイエンス"
         </li>
       </ol>
     </article>
-
-    <footer class="gap-0 text-center text-xs">
-      © 2024 denkiwakame powered by <Link
-        href="https://astro.build/"
-        target="_blank"
-        label="Astro"
-      />
-    </footer>
   </main>
+
+  <article class="flex flex-col gap-6">
+    <h3 class="blink text-lg text-neutral-100">Academic Service</h3>
+    <ol class="relative border-s border-neutral-700 dark:border-gray-700">
+      <li class="mb-2 ms-4">
+        <p class="text-neutral-100">Reviewer</p>
+        <span class="text-xs"
+          >ICCV 2023, CVPR 2023, IROS 2023-2024, ICRA 2024, TPAMI, WACV 2022,
+          ICPR 2022, 3DV 2020-2021, MVA 2021</span
+        >
+      </li>
+    </ol>
+  </article>
+
+  <footer class="gap-0 text-center text-xs">
+    © 2024 denkiwakame powered by <Link
+      href="https://astro.build/"
+      target="_blank"
+      label="Astro"
+    />
+  </footer>
 </Layout>
