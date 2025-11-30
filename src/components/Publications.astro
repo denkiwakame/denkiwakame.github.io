@@ -1,5 +1,6 @@
 ---
 import publications from "@/data/publications";
+import workshops from "@/data/workshops";
 import preprints from "@/data/preprints";
 import Resource from "@/components/Resource.astro";
 ---
@@ -36,7 +37,35 @@ import Resource from "@/components/Resource.astro";
       ))
     }
   </ol>
-  <h3 class="blink text-lg text-neutral-100">Workshop Papers, Extended Abstracts, and Preprints</h3>
+  <h3 class="blink text-lg text-neutral-100">
+    Workshop Papers and Extended Abstracts (Peer-Reviewed)
+  </h3>
+  <ol class="relative border-s border-neutral-700 dark:border-gray-700">
+    {
+      workshops.map((pub, index) => (
+        <li class="mb-5 ms-4">
+          <p class="text-neutral-100">{pub.title}</p>
+          <p className="text-xs">
+            {pub.authors.map((author, index) => (
+              <span class="text-xs" key={index}>
+                {author === "Mai Nishimura" ? <u>{author}</u> : author}
+                {index < pub.authors.length - 1 && ", "}
+              </span>
+            ))}
+          </p>
+          <span class="text-xs">{pub.journal}</span>
+          {", "}
+          <time>{pub.year}</time>
+          <p>
+            {Object.entries(pub.links).map(([key, val]) => {
+              return <Resource label={key} url={val} />;
+            })}
+          </p>
+        </li>
+      ))
+    }
+  </ol>
+  <h3 class="blink text-lg text-neutral-100">Preprints</h3>
   <ol class="relative border-s border-neutral-700 dark:border-gray-700">
     {
       preprints.map((pub, index) => (
