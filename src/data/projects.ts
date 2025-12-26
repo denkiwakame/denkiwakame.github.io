@@ -22,6 +22,11 @@ const projects: Project[] = [
     link: "https://github.com/denkiwakame/numpy-blas-bench",
   },
   {
+    title: "pixi-tex",
+    techs: ["TeX", "Pixi", "Tectonic", "XeTeX"],
+    link: "https://github.com/denkiwakame/pixi-tex",
+  },
+  {
     title: "py-tiny-pkg",
     techs: ["Python Packaging", "PEP links for my personal use"],
     link: "https://github.com/denkiwakame/py-tiny-pkg",
