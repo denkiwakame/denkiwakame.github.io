@@ -12,6 +12,11 @@ const entries: Entry[] = [
     link: "https://denkiwakame.notion.site/2ba3175c6b6a80d19141f5407c39ad4e?v=2ba3175c6b6a80a7acfe000c6c1b2117",
   },
   {
+    title: "How to Report Progress Effectively",
+    techs: ["Research"],
+    link: "https://denkiwakame.notion.site/625a3884f3fe4d888150788476c4e8f9",
+  },
+  {
     title:
       "Essential Pointers for Smooth NVIDIA Driver, CUDA, and Docker Integration",
     techs: ["CUDA", "docker", "driver"],
@@ -31,11 +36,6 @@ const entries: Entry[] = [
     title: "Manageng Dotfiles by Rust Tools",
     techs: ["Rust", "Pixi", "dotfiles", "nvim"],
     link: "https://denkiwakame.notion.site/Shell-Tools-Rust-1693175c6b6a80319e06c71dea5162db",
-  },
-  {
-    title: "How to Report Progress Effectively",
-    techs: ["Research"],
-    link: "https://denkiwakame.notion.site/625a3884f3fe4d888150788476c4e8f9",
   },
 ];
 
