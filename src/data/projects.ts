@@ -17,6 +17,11 @@ const projects: Project[] = [
     link: "https://github.com/denkiwakame/academic-project-template",
   },
   {
+    title: "nanokit",
+    techs: ["Pixi", "zsh", "sheldon", "starship", "dotter", "neovim"],
+    link: "https://github.com/denkiwakame/nanokit",
+  },
+  {
     title: "numpy-blas-bench",
     techs: ["Numpy", "MKL", "OpenBLAS", "AOCL", "conda", "pypi"],
     link: "https://github.com/denkiwakame/numpy-blas-bench",
