@@ -1,0 +1,50 @@
+---
+import Icon, { type IconName } from './Icon.astro';
+
+interface Props {
+  title: string;
+  icon: IconName;
+  /** Optional mono text at the right end of the rule, e.g. "29 entries". */
+  meta?: string;
+  id?: string;
+}
+const { title, icon, meta, id } = Astro.props;
+---
+
+<div class="head">
+  <h2 id={id}><span class="icon"><Icon name={icon} /></span>{title}</h2>
+  <div class="rule"></div>
+  {meta && <span class="meta mono">{meta}</span>}
+</div>
+
+<style>
+  .head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  h2 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: var(--text-h2);
+    font-weight: 600;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg);
+  }
+  .icon {
+    display: inline-flex;
+    color: var(--color-accent);
+  }
+  .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+  .meta {
+    font-size: var(--text-meta);
+    color: var(--color-muted);
+  }
+</style>

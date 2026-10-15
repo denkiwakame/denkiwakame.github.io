@@ -1,0 +1,659 @@
+- id: clap
+  title: "CLAP: Direct VLM-to-VLA Adaptation via Language-Action Grounding"
+  authors:
+    - yuri-ishitoya
+    - jeremy-siburian
+    - masashi-hamaya
+    - haruto-suzuki
+    - kuniaki-saito
+    - toshihiko-fukushima
+    - cristian-beltran-hernandez
+    - mai-nishimura
+  dagger:
+    - yuri-ishitoya
+    - jeremy-siburian
+    - mai-nishimura
+  venue: Conference on Robot Learning
+  abbrev: CoRL
+  year: 2026
+  type: conference
+  teaserUrl: https://omron-sinicx.github.io/clap/teaser.png
+  arxiv: "2607.08974"
+  links:
+    paper: https://arxiv.org/abs/2607.08974
+    project: https://omron-sinicx.github.io/clap/
+    code: https://github.com/omron-sinicx/clap
+  bibtex: |
+    @inproceedings{ishitoya2026clap,
+      title={CLAP: Direct VLM-to-VLA Adaptation via Language-Action Grounding},
+      author={Yuri Ishitoya and Jeremy Siburian and Masashi Hamaya and Haruto Suzuki and Kuniaki Saito and Toshihiko Fukushima and Cristian C. Beltran-Hernandez and Mai Nishimura},
+      booktitle={10th Annual Conference on Robot Learning},
+      year={2026}
+    }
+  related:
+    - title: "Can Compact Language Models Search Like Agents? Distillation-Guided Policy Optimization for Preserving Agentic RAG Capability"
+      venue: ACL'26
+      url: https://omron-sinicx.github.io/dgpo/
+      image: https://omron-sinicx.github.io/dgpo/acl26_fig2_v3.png
+      description: Distillation-Guided Policy Optimization (DGPO), a two-phase training framework combining cold-start knowledge distillation and selective teacher-guided reinforcement learning.
+- id: phase
+  title: "PHASE: Compliance-Enabled Tactile Phase Retrieval for Few-Shot Insertion Learning"
+  authors:
+    - jeremy-siburian
+    - cristian-beltran-hernandez
+    - tatsuya-matsushima
+    - yusuke-iwasawa
+    - masashi-hamaya
+    - mai-nishimura
+  dagger:
+    - masashi-hamaya
+    - mai-nishimura
+  daggerNote: joint last authors
+  daggerMark: ‡
+  venue: International Conference on Intelligent Robots and Systems
+  abbrev: IROS
+  year: 2026
+  type: conference
+  teaserUrl: https://omron-sinicx.github.io/phase/teaser.png
+  teaserWidth: 480
+  arxiv: "2609.30889"
+  links:
+    paper: https://arxiv.org/abs/2609.30889
+    project: https://omron-sinicx.github.io/phase/
+    video: https://www.youtube.com/watch?v=h-daPHmVC5E
+    poster: https://omron-sinicx.github.io/phase/poster.pdf
+  bibtex: |
+    @inproceedings{siburian2026phase,
+      title={PHASE: Compliance-Enabled Tactile Phase Retrieval for Few-Shot Insertion Learning},
+      author={Siburian, Jeremy and Beltran-Hernandez, Cristian C. and Matsushima, Tatsuya and Iwasawa, Yusuke and Hamaya, Masashi and Nishimura, Mai},
+      booktitle={2026 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+      address={Pittsburgh, PA, USA},
+      organization={IEEE},
+      year={2026}
+    }
+  related:
+    - title: "Tactile Memory with Soft Robot: Robust Object Insertion via Masked Encoding and Soft Wrist"
+      venue: RA-L'26
+      url: https://omron-sinicx.github.io/tameso/
+      image: https://omron-sinicx.github.io/tameso/teaser.png
+      description: A soft wrist lets the robot explore contact safely while a tactile memory retrieves past demonstrations, so it adapts to unseen pegs and conditions.
+    - title: "Multi-Agent Behavior Retrieval: Retrieval-Augmented Policy Training for Cooperative Push Manipulation by Mobile Robots"
+      venue: IROS'24
+      url: https://omron-sinicx.github.io/mabr/
+      image: https://omron-sinicx.github.io/mabr/assets/method.png
+      description: A Transformer-based skill encoder builds a multi-agent skill database, so mobile robots retrieve prior demonstrations to augment policy training for cooperative push manipulation.
+- id: dgpo
+  title: Can Compact Language Models Search Like Agents? Distillation-Guided Policy Optimization for Preserving Agentic RAG Capabilities
+  authors:
+    - rikuto-kotoge
+    - mai-nishimura
+    - jiaxin-ma
+  venue: Association for Computational Linguistics
+  abbrev: ACL
+  year: 2026
+  type: conference
+  teaserUrl: https://omron-sinicx.github.io/dgpo/acl26_fig1.png
+  teaserWidth: 390
+  arxiv: "2508.20324"
+  links:
+    paper: https://arxiv.org/abs/2508.20324
+    project: https://omron-sinicx.github.io/dgpo/
+    code: https://github.com/omron-sinicx/dgpo
+    huggingface: https://huggingface.co/collections/omron-sinicx/dgpo
+    poster: https://omron-sinicx.github.io/dgpo/poster_acl_dgpo.pdf
+  bibtex: |
+    @inproceedings{kotoge2026dgpo,
+        title = "Can Compact Language Models Search Like Agents? Distillation-Guided Policy Optimization for Preserving Agentic RAG Capabilities",
+        author = "Kotoge, Rikuto and Nishimura, Mai and Ma, Jiaxin",
+        booktitle = "Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+        month = jul,
+        year = "2026",
+        publisher = "Association for Computational Linguistics",
+    }
+- id: tactile-memory
+  title: "Tactile Memory with Soft Robot: Robust Object Insertion via Masked Encoding and Soft Wrist"
+  authors:
+    - tatsuya-kamijo
+    - mai-nishimura
+    - nodoka-shibasaki
+    - jeremy-siburian
+    - cristian-beltran-hernandez
+    - masashi-hamaya
+  dagger:
+    - tatsuya-kamijo
+    - mai-nishimura
+  venue: IEEE Robotics and Automation Letters
+  abbrev: RA-L
+  year: 2026
+  type: journal
+  teaserUrl: https://omron-sinicx.github.io/tameso/teaser.png
+  arxiv: "2601.19275"
+  links:
+    paper: https://arxiv.org/abs/2601.19275
+    project: https://omron-sinicx.github.io/tameso/
+    code: https://github.com/omron-sinicx/tameso
+  bibtex: |
+    @article{kamijo2026tactile,
+      title={Tactile Memory with Soft Robot: Robust Object Insertion via Masked Encoding and Soft Wrist},
+      author={Kamijo, Tatsuya and Nishimura, Mai and Shibasaki, Nodoka and Siburian, Jeremy and Beltran-Hernandez, Cristian C and Hamaya, Masashi},
+      journal={IEEE Robotics and Automation Letters},
+      volume={11},
+      number={7},
+      pages={7844--7851},
+      year={2026},
+      doi={10.1109/LRA.2026.3692097},
+      publisher={IEEE}
+    }
+  related:
+    - title: "PHASE: Compliance-Enabled Tactile Phase Retrieval for Few-Shot Insertion Learning"
+      venue: IROS'26
+      url: https://omron-sinicx.github.io/phase/
+      image: https://omron-sinicx.github.io/phase/teaser.png
+      description: A compliant wrist reveals insertion phases from touch, so phase-consistent retrieval lifts few-shot peg-in-hole success by 13 points.
+    - title: "Multi-Agent Behavior Retrieval: Retrieval-Augmented Policy Training for Cooperative Push Manipulation by Mobile Robots"
+      venue: IROS'24
+      url: https://omron-sinicx.github.io/mabr/
+      image: https://omron-sinicx.github.io/mabr/assets/teaser.png
+      description: A multi-agent coordination skill database lets mobile robots reuse past memories to adapt to new cooperative manipulation tasks.
+- id: plasma
+  title: "Plasma: A Layout-Aware Benchmark Reveals Memory Layout Matters for Graph-based ANNS on GPU"
+  authors:
+    - yutaro-oguri
+    - mai-nishimura
+    - yusuke-matsui
+  venue: The 2nd Workshop on Vector Databases (VecDB), VLDB 2026
+  abbrev: VecDB WS
+  year: 2026
+  type: workshop
+  teaserUrl: https://omron-sinicx.github.io/plasma/teaser.png
+  arxiv: "2508.15436"
+  links:
+    paper: https://arxiv.org/abs/2508.15436
+    openreview: https://openreview.net/forum?id=tF70hyyM6V
+    project: https://omron-sinicx.github.io/plasma/
+    code: https://github.com/omron-sinicx/plasma
+    dataset: https://huggingface.co/datasets/omron-sinicx/plasma
+    poster: https://omron-sinicx.github.io/plasma/Plasma_A1_poster.pdf
+  bibtex: |
+    @inproceedings{oguri2026plasma,
+      author       = {Yutaro Oguri and
+                      Mai Nishimura and
+                      Yusuke Matsui},
+      title        = {Plasma: A Layout-Aware Benchmark Reveals Memory Layout Matters
+                      for Graph-based ANNS on GPU},
+      booktitle    = {The 2nd Workshop on Vector Databases (VecDB) at
+                      Very Large Data Bases (VLDB)},
+      year         = {2026},
+      url          = {https://vecdb-ws.github.io/vldb2026/}
+    }
+  related:
+    - title: "Can Compact Language Models Search Like Agents? Distillation-Guided Policy Optimization for Preserving Agentic RAG Capability"
+      venue: ACL'26
+      url: https://omron-sinicx.github.io/dgpo/
+      image: https://omron-sinicx.github.io/dgpo/acl26_fig2_v3.png
+      description: Distillation-Guided Policy Optimization (DGPO), a two-phase training framework combining cold-start knowledge distillation and selective teacher-guided reinforcement learning.
+    - title: "PHASE: Compliance-Enabled Tactile Phase Retrieval for Few-Shot Insertion Learning"
+      venue: IROS'26
+      url: https://omron-sinicx.github.io/phase/
+      image: https://omron-sinicx.github.io/phase/teaser.png
+      description: A compliant wrist reveals insertion phases from touch, so phase-consistent retrieval lifts few-shot peg-in-hole success by 13 points.
+    - title: "Tactile Memory with Soft Robot: Robust Object Insertion via Masked Encoding and Soft Wrist"
+      venue: RA-L'26
+      url: https://omron-sinicx.github.io/tameso/
+      image: https://omron-sinicx.github.io/tameso/teaser.png
+      description: A soft wrist collects safe tactile demos, and masked trajectory encoding retrieves them to insert unseen pegs at 85% success.
+    - title: "Multi-Agent Behavior Retrieval: Retrieval-Augmented Policy Training for Cooperative Push Manipulation by Mobile Robots"
+      venue: IROS'24
+      url: https://omron-sinicx.github.io/mabr/
+      image: https://omron-sinicx.github.io/mabr/assets/teaser.png
+      description: A multi-agent coordination skill database lets multiple mobile robots reuse past memories to adapt to new cooperative manipulation tasks.
+- id: fluidic-swarm-control
+  title: Fluidic robot swarm control for obstacle-unaware navigation
+  authors:
+    - michikuni-eguchi
+    - mai-nishimura
+    - shigeo-yoshida
+    - takefumi-hiraki
+  venue: Advanced Robotics
+  abbrev: Adv. Robotics
+  year: 2025
+  type: journal
+  doi: "10.1080/01691864.2025.2517214"
+  volume: "39"
+  number: "12"
+  pages: "748-764"
+  links:
+    paper: https://www.tandfonline.com/doi/abs/10.1080/01691864.2025.2517214
+- id: dgpo-ws
+  title: "Democratizing Agentic RAG: Distillation-Guided Policy Optimization for Compact Language Models"
+  authors:
+    - rikuto-kotoge
+    - mai-nishimura
+    - jiaxin-ma
+  venue: "NeurIPS Workshop on LAW: Bridging Language, Agent, and World Models"
+  abbrev: NeurIPS WS
+  year: 2025
+  type: workshop
+  links:
+    openreview: https://openreview.net/forum?id=CP0H9NAWES
+    workshop: https://sites.google.com/view/law-2025
+- id: tactile-memory-ws
+  title: "Tactile Memory with Soft Robot: Tactile Retrieval-based Contact-rich Manipulation with a Soft Wrist"
+  authors:
+    - tatsuya-kamijo
+    - mai-nishimura
+    - cristian-beltran-hernandez
+    - masashi-hamaya
+  venue: "CoRL Workshop on Dexterous Manipulation: Learning and Control with Diverse Modalities"
+  abbrev: CoRL WS
+  year: 2025
+  type: workshop
+  links:
+    openreview: https://openreview.net/forum?id=uLE44csBAT
+- id: fluidicswarm
+  title: "FluidicSwarm: Embodiment of Swarm Robots Using Fluid Behavior Imitation"
+  authors:
+    - michikuni-eguchi
+    - shigeo-yoshida
+    - mai-nishimura
+    - takefumi-hiraki
+  venue: ACM SIGGRAPH 2025 Emerging Technologies (SIGGRAPH 2025)
+  abbrev: SIGGRAPH ET
+  year: 2025
+  type: workshop
+  doi: "10.1145/3721257.3734028"
+  pages: "1-2"
+  links:
+    paper: https://dl.acm.org/doi/10.1145/3721257.3734028
+    project: https://mvml.slis.tsukuba.ac.jp/research_ja/fluidicswarm/
+- id: mabr
+  title: "Multi-Agent Behavior Retrieval: Retrieval-Augmented Policy Training for Cooperative Push Manipulation by Mobile Robots"
+  authors:
+    - so-kuroki
+    - mai-nishimura
+    - tadashi-kozuno
+  venue: International Conference on Intelligent Robots and Systems
+  abbrev: IROS
+  year: 2024
+  type: conference
+  teaserUrl: https://omron-sinicx.github.io/mabr/assets/teaser.png
+  teaserWidth: 650
+  arxiv: "2312.02008"
+  links:
+    paper: https://arxiv.org/abs/2312.02008
+    project: https://omron-sinicx.github.io/mabr/
+    video: https://www.youtube.com/watch?v=RSUhHHxz5Vk
+  # Official BibTeX from the project page, with its typos fixed (Nishiura → Nishimura, "and" separators, missing comma).
+  bibtex: |
+    @inproceedings{kuroki2024iros,
+      title={Multi-Agent Behavior Retrieval: Retrieval-Augmented Policy Training for Cooperative Push Manipulation by Mobile Robots},
+      author={So Kuroki and Mai Nishimura and Tadashi Kozuno},
+      booktitle={2024 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+      organization={IEEE},
+      pages={12671--12678},
+      year={2024},
+      doi={10.1109/IROS58592.2024.10801334}
+    }
+  related:
+    - title: "maru: a miniature-sized wheeled robot for swarm robotics research"
+      venue: CHI'24
+      url: https://github.com/omron-sinicx/swarm-body
+      image: https://github.com/omron-sinicx/swarm-body/raw/main/images/teaser.jpg
+      description: A custom-made, miniature-sized, two-wheeled robot (miniature assemblage adaptive robot unit) designed for tabletop swarm robotics research.
+    - title: Language-Guided Pattern Formation for Swarm Robotics with Multi-Agent Reinforcement Learning
+      venue: IROS'24
+      url: https://omron-sinicx.github.io/language-guided-pattern-formation/
+      image: https://omron-sinicx.github.io/language-guided-pattern-formation/assets/overview.jpg
+      description: Leverages the knowledge encoded in large language models to tackle pattern formation for swarm robotics systems.
+- id: sph-swarm
+  title: Robot Swarm Control Based on Smoothed Particle Hydrodynamics for Obstacle-Unaware Navigation
+  authors:
+    - michikuni-eguchi
+    - mai-nishimura
+    - shigeo-yoshida
+    - takefumi-hiraki
+  venue: International Conference on Intelligent Robots and Systems
+  abbrev: IROS
+  year: 2024
+  type: conference
+  doi: "10.1109/IROS58592.2024.10801800"
+  pages: "9006-9013"
+  arxiv: "2404.16309"
+  links:
+    paper: https://arxiv.org/abs/2404.16309
+- id: swarm-body
+  title: "Swarm Body: Embodied Swarm Robots"
+  authors:
+    - sosuke-ichihashi
+    - so-kuroki
+    - mai-nishimura
+    - kazumi-kasaura
+    - takefumi-hiraki
+    - kazutoshi-tanaka
+    - shigeo-yoshida
+  venue: ACM Conference on Human Factors in Computing Systems
+  abbrev: CHI
+  year: 2024
+  type: conference
+  award: Interactivity Popular Choice Honorable Mention
+  teaserUrl: https://omron-sinicx.github.io/maru/assets/featured_swarm.png
+  arxiv: "2402.15830"
+  links:
+    paper: https://doi.org/10.1145/3613904.3642870
+    arxiv: https://arxiv.org/abs/2402.15830
+    project: https://shigeodayo.me/works/swarm_body/
+    robot: https://omron-sinicx.github.io/maru/
+    code: https://github.com/omron-sinicx/maru
+    video: https://www.youtube.com/watch?v=OdKoSDsrrIU
+  # Official BibTeX from the maru page, with two fixes: plain `url` (was a Markdown link) and `location` without stray commas.
+  bibtex: |
+    @inproceedings{ichihashi2024swarm,
+      author = {Ichihashi, Sosuke and Kuroki, So and Nishimura, Mai and Kasaura, Kazumi and Hiraki, Takefumi and Tanaka, Kazutoshi and Yoshida, Shigeo},
+      title = {Swarm Body: Embodied Swarm Robots},
+      year = {2024},
+      publisher = {Association for Computing Machinery},
+      address = {New York, NY, USA},
+      url = {https://doi.org/10.1145/3613904.3642870},
+      doi = {10.1145/3613904.3642870},
+      booktitle = {Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems},
+      numpages = {19},
+      location = {Honolulu, HI, USA},
+      series = {CHI '24}
+    }
+  related:
+    - title: "FluidicSwarm: Embodiment of Swarm Robots Using Fluid Behavior Imitation"
+      venue: SIGGRAPH ETech'25
+      url: https://mvml.slis.tsukuba.ac.jp/research/fluidicswarm/
+      image: https://omron-sinicx.github.io/maru/assets/featured_fluidicswarm.jpg
+      description: A control system that lets users intuitively manipulate robot swarms as fluid-like extensions of their own bodies.
+    - title: "Multi-Agent Behavior Retrieval: Retrieval-Augmented Policy Training for Cooperative Push Manipulation by Mobile Robots"
+      venue: IROS'24
+      url: https://omron-sinicx.github.io/mabr/
+      image: https://omron-sinicx.github.io/mabr/assets/teaser.png
+      description: A multi-agent coordination skill database lets multiple mobile robots reuse past memories to adapt to new tasks.
+    - title: Language-Guided Pattern Formation for Swarm Robotics with Multi-Agent Reinforcement Learning
+      venue: IROS'24
+      url: https://omron-sinicx.github.io/language-guided-pattern-formation/
+      image: https://omron-sinicx.github.io/language-guided-pattern-formation/assets/overview.jpg
+      description: Leverages the knowledge encoded in large language models to tackle pattern formation for swarm robotics systems.
+- id: when2replan
+  title: When to Replan? An Adaptive Replanning Strategy for Autonomous Navigation using Deep Reinforcement Learning
+  authors:
+    - kohei-honda
+    - ryo-yonetani
+    - mai-nishimura
+    - tadashi-kozuno
+  venue: International Conference on Robotics and Automation
+  abbrev: ICRA
+  year: 2024
+  type: conference
+  doi: "10.1109/ICRA57147.2024.10611474"
+  pages: "6650-6656"
+  arxiv: "2304.12046"
+  links:
+    paper: https://arxiv.org/abs/2304.12046
+    project: https://omron-sinicx.github.io/when2replan/
+- id: ncf2
+  title: Counterfactual Fairness Filter for Fair-Delay Multi-Robot Navigation
+  authors:
+    - hikaru-asano
+    - ryo-yonetani
+    - mai-nishimura
+    - tadashi-kozuno
+  venue: International Conference on Autonomous Agents and Multi-Agent Systems
+  abbrev: AAMAS
+  year: 2023
+  type: conference
+  pages: "887-895"
+  arxiv: "2305.11465"
+  links:
+    paper: https://arxiv.org/abs/2305.11465
+    project: https://omron-sinicx.github.io/ncf2/
+- id: view-birdification-ijcv
+  title: "View Birdification in the Crowd: Ground-Plane Localization from Perceived Movements"
+  authors:
+    - mai-nishimura
+    - shohei-nobuhara
+    - ko-nishino
+  venue: International Journal of Computer Vision
+  abbrev: IJCV
+  year: 2023
+  type: journal
+  doi: "10.1007/s11263-023-01788-9"
+  volume: "131"
+  number: "8"
+  pages: "2015-2031"
+  arxiv: "2111.05060"
+  links:
+    paper: https://link.springer.com/article/10.1007/s11263-023-01788-9
+    arxiv: https://arxiv.org/abs/2111.05060v2
+- id: periodic-mapp
+  title: Periodic Multi-Agent Path Planning
+  authors:
+    - kazumi-kasaura
+    - ryo-yonetani
+    - mai-nishimura
+  venue: AAAI Conference on Artificial Intelligence
+  abbrev: AAAI
+  year: 2023
+  type: conference
+  doi: "10.1609/aaai.v37i5.25762"
+  volume: "37"
+  number: "5"
+  pages: "6183-6191"
+  links:
+    paper: https://github.com/omron-sinicx/PeriodicMAPP/blob/master/paper.pdf
+    project: https://omron-sinicx.github.io/PeriodicMAPP/
+- id: incrowdformer
+  title: "InCrowdFormer: On-Ground Pedestrian World Model From Egocentric Views"
+  authors:
+    - mai-nishimura
+    - shohei-nobuhara
+    - ko-nishino
+  venue: arXiv
+  abbrev: arXiv
+  year: 2023
+  type: preprint
+  arxiv: "2303.09534"
+  links:
+    paper: https://arxiv.org/abs/2303.09534
+- id: transposer
+  title: "TransPoser: Transformer as an Optimizer for Joint Object Shape and Pose Estimation"
+  authors:
+    - yuta-yoshitake
+    - mai-nishimura
+    - shohei-nobuhara
+    - ko-nishino
+  venue: arXiv
+  abbrev: arXiv
+  year: 2023
+  type: preprint
+  arxiv: "2303.13477"
+  links:
+    paper: https://arxiv.org/abs/2303.13477
+- id: viewbirdiformer
+  title: "ViewBirdiformer: Learning to recover ground-plane crowd trajectories and ego-motion from a single ego-centric view"
+  authors:
+    - mai-nishimura
+    - shohei-nobuhara
+    - ko-nishino
+  venue: IEEE Robotics and Automation Letters
+  abbrev: RA-L
+  year: 2022
+  type: journal
+  pubYear: 2023
+  doi: "10.1109/LRA.2022.3221335"
+  volume: "8"
+  number: "1"
+  pages: "368-375"
+  arxiv: "2210.06332"
+  links:
+    paper: https://arxiv.org/abs/2210.06332
+- id: psipp-ctc
+  title: Prioritized Safe Interval Path Planning for Multi-Agent Pathfinding with Continuous Time on 2D Roadmaps
+  authors:
+    - kazumi-kasaura
+    - mai-nishimura
+    - ryo-yonetani
+  venue: IEEE Robotics and Automation Letters
+  abbrev: RA-L
+  year: 2022
+  type: journal
+  doi: "10.1109/LRA.2022.3187265"
+  volume: "7"
+  number: "4"
+  pages: "10494-10501"
+  links:
+    paper: https://ieeexplore.ieee.org/document/9811344
+    project: https://omron-sinicx.github.io/PSIPP-CTC/
+- id: ctrm
+  title: "CTRMs: Learning to Construct Cooperative Timed Roadmaps for Multi-agent Path Planning in Continuous Spaces"
+  authors:
+    - keisuke-okumura
+    - ryo-yonetani
+    - mai-nishimura
+    - asako-kanezaki
+  venue: International Conference on Autonomous Agents and Multi-Agent Systems
+  abbrev: AAMAS
+  year: 2022
+  type: conference
+  pages: "972-981"
+  arxiv: "2201.09467"
+  links:
+    paper: https://arxiv.org/abs/2201.09467
+    project: https://omron-sinicx.github.io/ctrm/
+- id: progressive-retransmission
+  title: Edge Computing-Assisted DNN Image Recognition System With Progressive Image Retransmission
+  authors:
+    - mutsuki-nakahara
+    - mai-nishimura
+    - yoshitaka-ushiku
+    - takayuki-nishio
+    - kazuki-maruta
+    - yu-nakayama
+    - daisuke-hisano
+  venue: IEEE Access
+  abbrev: IEEE Access
+  year: 2022
+  type: journal
+  doi: "10.1109/ACCESS.2022.3202172"
+  volume: "10"
+  pages: "91253-91262"
+  links:
+    paper: https://ieeexplore.ieee.org/abstract/document/9869327
+- id: view-birdification
+  title: "View Birdification in the Crowd: Ground-Plane Localization from Perceived Movements"
+  authors:
+    - mai-nishimura
+    - shohei-nobuhara
+    - ko-nishino
+  venue: The British Machine Vision Conference
+  abbrev: BMVC
+  year: 2021
+  type: conference
+  doi: "10.5244/C.35.120"
+  arxiv: "2111.05060"
+  links:
+    paper: https://arxiv.org/abs/2111.05060
+- id: neural-astar
+  title: Path Planning using Neural A* Search
+  authors:
+    - ryo-yonetani
+    - tatsunori-taniai
+    - mohammadamin-barekatain
+    - mai-nishimura
+    - asako-kanezaki
+  venue: International Conference on Machine Learning
+  abbrev: ICML
+  year: 2021
+  type: conference
+  arxiv: "2009.07476"
+  links:
+    paper: https://arxiv.org/abs/2009.07476
+    project: https://omron-sinicx.github.io/neural-astar/
+- id: adaptive-retransmission
+  title: Retransmission Edge Computing System Conducting Adaptive Image Compression Based on Image Recognition Accuracy
+  authors:
+    - mutsuki-nakahara
+    - daisuke-hisano
+    - mai-nishimura
+    - yoshitaka-ushiku
+    - kazuki-maruta
+    - yu-nakayama
+  venue: 2021 IEEE 94th Vehicular Technology Conference (VTC2021-Fall)
+  abbrev: VTC-Fall
+  year: 2021
+  type: conference
+  doi: "10.1109/VTC2021-Fall52928.2021.9625464"
+  pages: "1-5"
+  links:
+    paper: https://ieeexplore.ieee.org/document/9625464
+- id: crowd-density
+  title: Crowd Density Forecasting by Modeling Patch-based Dynamics
+  authors:
+    - hiroaki-minoura
+    - ryo-yonetani
+    - mai-nishimura
+    - yoshitaka-ushiku
+  venue: IEEE Robotics and Automation Letters
+  abbrev: RA-L
+  year: 2020
+  type: journal
+  pubYear: 2021
+  doi: "10.1109/LRA.2020.3043169"
+  volume: "6"
+  number: "2"
+  pages: "287-294"
+  arxiv: "1911.09814"
+  links:
+    paper: https://arxiv.org/abs/1911.09814
+- id: l2b
+  title: "L2B: Learning to Balance the Safety-Efficiency Trade-off in Interactive Crowd-aware Robot Navigation"
+  authors:
+    - mai-nishimura
+    - ryo-yonetani
+  venue: International Conference on Intelligent Robots and Systems
+  abbrev: IROS
+  year: 2020
+  type: conference
+  doi: "10.1109/IROS45743.2020.9341519"
+  pages: "11004-11010"
+  teaserUrl: https://denkiwakame.github.io/l2b/samples/image.png
+  arxiv: "2003.09207"
+  links:
+    paper: https://arxiv.org/abs/2003.09207
+    project: https://denkiwakame.github.io/l2b
+    video: https://www.youtube.com/watch?v=OB8KE9VXv3s
+    simulator: https://github.com/denkiwakame/Python-ERVO
+- id: l1-graph
+  title: Fast Algorithm for the Lasso based L1-Graph Construction
+  authors:
+    - yasuhiro-fujiwara
+    - yasutoshi-ida
+    - juny-arai
+    - mai-nishimura
+    - sotetsu-iwamura
+  venue: Proceedings of the VLDB Endowment
+  abbrev: PVLDB
+  year: 2016
+  type: journal
+  volume: "10"
+  links:
+    paper: http://www.vldb.org/pvldb/vol10/p229-fujiwara.pdf
+- id: generalized-calibration
+  title: A Linear Generalized Camera Calibration from Three Intersecting Reference Planes
+  authors:
+    - mai-nishimura
+    - shohei-nobuhara
+    - takashi-matsuyama
+    - shinya-shimizu
+    - kensaku-fujii
+  venue: International Conference on Computer Vision
+  abbrev: ICCV
+  year: 2015
+  type: conference
+  doi: "10.1109/ICCV.2015.271"
+  pages: "2354-2362"
+  links:
+    paper: https://openaccess.thecvf.com/content_iccv_2015/papers/Nishimura_A_Linear_Generalized_ICCV_2015_paper.pdf
+    code: https://github.com/computer-vision/iccv2015

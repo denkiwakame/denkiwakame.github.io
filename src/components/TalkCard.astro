@@ -1,0 +1,102 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ExternalLink from './ExternalLink.astro';
+
+interface Props {
+  talk: CollectionEntry<'talks'>;
+}
+const { title, venue, date, deckId, link, event } = Astro.props.talk.data;
+---
+
+<article class="talk">
+  <div class="frame">
+    {
+      deckId ? (
+        <iframe src={`https://speakerdeck.com/player/${deckId}`} title={title} loading="lazy" allowfullscreen allow="fullscreen" />
+      ) : (
+        <div class="placeholder mono" lang="ja">スライド準備中</div>
+      )
+    }
+  </div>
+  <div class="body">
+    <div class="meta mono">
+      {venue ? <span class="venue">{venue}</span> : <span />}
+      <span class="date">{date}</span>
+    </div>
+    <h3>{title}</h3>
+    <div class="links">
+      <ExternalLink href={link}>speakerdeck</ExternalLink>
+      {event && <ExternalLink href={event}>event</ExternalLink>}
+    </div>
+  </div>
+</article>
+
+<style>
+  .talk {
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+  .frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--color-sunken);
+    border-bottom: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+  iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .placeholder {
+    position: absolute;
+    inset: 0;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed var(--color-border);
+    font-size: var(--text-meta);
+    color: var(--color-muted);
+  }
+  .body {
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .meta {
+    align-self: stretch;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: var(--text-chip);
+    letter-spacing: 0.08em;
+  }
+  .venue {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: var(--radius-tag);
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .date {
+    color: var(--color-muted);
+  }
+  h3 {
+    margin: 0;
+    font-size: var(--text-row);
+    font-weight: 600;
+    line-height: 1.45;
+    text-wrap: pretty;
+  }
+</style>

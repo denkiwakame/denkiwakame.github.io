@@ -1,0 +1,105 @@
+---
+import AuthorList from './AuthorList.astro';
+import Chip from './Chip.astro';
+import { resolveAuthors, type Paper } from '../lib/papers';
+
+interface Props {
+  paper: Paper;
+}
+const { paper } = Astro.props;
+const { title, year, abbrev, venue, links } = paper.data;
+const authors = await resolveAuthors(paper);
+---
+
+<!-- Row and title share view-transition names with the detail page header, so the row expands into it. -->
+<div class="row" style={`view-transition-name: pub-${paper.id}; view-transition-class: pub`}>
+  <span class="year mono">{year}</span>
+  <div class="main">
+    <a class="title" href={`/publications/${paper.id}/`} style={`view-transition-name: pub-title-${paper.id}`}>{title}</a>
+    <div class="authors"><AuthorList authors={authors} daggerNote={paper.data.daggerNote} daggerMark={paper.data.daggerMark} compact /></div>
+  </div>
+  <div class="side">
+    <span title={venue}><Chip variant="accent">{abbrev}</Chip></span>
+    <div class="links mono">
+      {Object.entries(links).map(([label, href]) => <a href={href} rel="noopener">{label}</a>)}
+    </div>
+  </div>
+</div>
+
+<style>
+  .row {
+    display: grid;
+    grid-template-columns: 56px 1fr 130px;
+    grid-template-areas: 'year main side';
+    gap: 18px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--color-rule);
+    align-items: baseline;
+  }
+  /* Same hover as ListRow (Pet projects / Posts): white row, accent title. */
+  .row:hover {
+    background: var(--color-surface);
+  }
+  .row:hover .title {
+    color: var(--color-accent);
+  }
+  .year {
+    grid-area: year;
+    font-size: var(--text-meta);
+    color: var(--color-muted);
+  }
+  .main {
+    grid-area: main;
+  }
+  .title {
+    display: block;
+    width: fit-content;
+    font-size: var(--text-row);
+    line-height: 1.5;
+    font-weight: 500;
+    text-wrap: pretty;
+  }
+  .authors {
+    font-size: 12px;
+    color: var(--color-muted);
+    margin-top: 3px;
+    line-height: 1.5;
+  }
+  .side {
+    grid-area: side;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    font-size: var(--text-micro);
+  }
+  .links a {
+    color: var(--color-accent);
+  }
+  .links a:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* Narrow: year + venue + links on one line, title block below.
+     The parent list must set container-type: inline-size. */
+  @container (width < 640px) {
+    .row {
+      grid-template-columns: auto 1fr;
+      grid-template-areas:
+        'year side'
+        'main main';
+      gap: 6px 12px;
+    }
+    .side {
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+</style>

@@ -1,0 +1,25 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  href: string;
+}
+const { href } = Astro.props;
+---
+
+<a href={href} class="ext mono" rel="noopener"><slot /><Icon name="arrow" size={11} /></a>
+
+<style>
+  .ext {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-micro);
+    font-weight: 500;
+    color: var(--color-accent);
+  }
+  .ext:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

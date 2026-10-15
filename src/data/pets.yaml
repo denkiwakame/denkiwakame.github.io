@@ -1,0 +1,6 @@
+- { id: arxiv2notion, title: arxiv2notion, techs: Chrome Extension · Notion API, link: "https://github.com/denkiwakame/arxiv2notion" }
+- { id: academic-project-template, title: academic-project-template, techs: React · UIKit, link: "https://github.com/denkiwakame/academic-project-template" }
+- { id: nanokit, title: nanokit, techs: Pixi · zsh · starship · neovim, link: "https://github.com/denkiwakame/nanokit" }
+- { id: numpy-blas-bench, title: numpy-blas-bench, techs: MKL · OpenBLAS · AOCL · conda, link: "https://github.com/denkiwakame/numpy-blas-bench" }
+- { id: pixi-tex, title: pixi-tex, techs: TeX · Tectonic · XeTeX, link: "https://github.com/denkiwakame/pixi-tex" }
+- { id: py-tiny-pkg, title: py-tiny-pkg, techs: Python Packaging · PEP, link: "https://github.com/denkiwakame/py-tiny-pkg" }

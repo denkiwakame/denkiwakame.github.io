@@ -1,0 +1,357 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { Image } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+import 'katex/dist/katex.min.css';
+import Base from '../../layouts/Base.astro';
+import AuthorList from '../../components/AuthorList.astro';
+import BibtexBlock from '../../components/BibtexBlock.astro';
+import Chip from '../../components/Chip.astro';
+import ExternalLink from '../../components/ExternalLink.astro';
+import Icon from '../../components/Icon.astro';
+import FigureCarousel from '../../components/FigureCarousel.astro';
+import RelatedBanner from '../../components/RelatedBanner.astro';
+import { artFor } from '../../lib/art';
+import { assertSummarySections, getPapers, getSummary, resolveAuthors, toBibtex, type Paper } from '../../lib/papers';
+import { getOrdered } from '../../lib/order';
+
+export const getStaticPaths = (async () => {
+  // Check every summary's structure, including drafts that are hidden in production.
+  for (const s of await getCollection('summaries')) assertSummarySections(s, (await render(s)).headings);
+  const papers = await getPapers();
+  return papers.map((paper) => ({ params: { id: paper.id }, props: { paper } }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  paper: Paper;
+}
+const { paper } = Astro.props;
+const { title, venue, abbrev, year, award, teaser, teaserUrl, teaserWidth, links, arxiv, related } = paper.data;
+const authors = await resolveAuthors(paper);
+const summary = await getSummary(paper.id);
+const Content = summary ? (await render(summary)).Content : undefined;
+
+// A booth that lists this paper lends its art.
+const booth = (await getOrdered('projects')).find((p) => p.data.papers.some((r) => r.id === paper.id));
+const art = booth?.data.art ?? artFor(paper.id);
+const description = summary?.data.tldr ?? `${title}. ${venue} ${year}.`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ScholarlyArticle',
+  headline: title,
+  name: title,
+  author: authors.map((a) => ({ '@type': 'Person', name: a.name, ...(a.url ? { url: a.url } : {}) })),
+  datePublished: String(year),
+  isPartOf: { '@type': 'PublicationIssue', name: venue },
+  ...(summary ? { abstract: summary.data.tldr } : {}),
+  sameAs: Object.values(links),
+  ...(arxiv ? { identifier: `arXiv:${arxiv}` } : {}),
+};
+---
+
+<Base title={title} description={description} type="article">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+  <main class="page detail">
+    <a href="/#publications" class="back mono"><Icon name="back" size={12} />All publications</a>
+
+    <!-- One white "sheet", like a white paper. It shares a view-transition name with the publication row. -->
+    <article class="sheet" style={`view-transition-name: pub-${paper.id}; view-transition-class: pub`}>
+      {summary && !summary.data.reviewed && <p class="draft mono">DRAFT — not reviewed, hidden in production</p>}
+
+      <header>
+        <div class="venue">
+          <span title={venue}><Chip variant="accent">{abbrev}</Chip></span>
+          <span class="mono">{venue} · {year}</span>
+          {award && <Chip variant="venue">{award}</Chip>}
+        </div>
+        <h1 style={`view-transition-name: pub-title-${paper.id}`}>{title}</h1>
+        <p class="authors"><AuthorList authors={authors} daggerNote={paper.data.daggerNote} daggerMark={paper.data.daggerMark} /></p>
+        <div class="actions">
+          {Object.entries(links).map(([label, href]) => <ExternalLink href={href}>{label}</ExternalLink>)}
+          <a href="#bibtex" class="cite mono">cite ↓</a>
+        </div>
+      </header>
+
+      <div class:list={['teaser', { art: !teaser && !teaserUrl }]} style={teaserWidth && `--fig-width: ${teaserWidth}px`}>
+        {
+          teaser ? (
+            <Image src={teaser} alt={`Teaser figure of ${title}`} widths={[640, 1280]} sizes="(min-width: 860px) 760px, 100vw" />
+          ) : teaserUrl ? (
+            <img src={teaserUrl} alt={`Teaser figure of ${title}`} decoding="async" />
+          ) : (
+            <img src={`/art/${art}.svg`} alt="" width="320" height="200" />
+          )
+        }
+      </div>
+
+      {
+        summary && Content && (
+          <>
+            <section class="abstract" aria-label="TL;DR">
+              <span class="label mono">TL;DR</span>
+              <p>{summary.data.tldr}</p>
+            </section>
+            <div class="prose">
+              <Content />
+            </div>
+            {summary.data.demos.length > 0 && <FigureCarousel demos={summary.data.demos} />}
+          </>
+        )
+      }
+
+      <footer>
+        {
+          related.length > 0 && (
+            <section class="related" aria-labelledby="related-label">
+              <h2 id="related-label" class="label mono">Related projects</h2>
+              <div class="banners">
+                {related.map((r) => (
+                  <RelatedBanner {...r} />
+                ))}
+              </div>
+            </section>
+          )
+        }
+        <BibtexBlock bibtex={toBibtex(paper, authors)} />
+      </footer>
+    </article>
+  </main>
+</Base>
+
+<style>
+  .detail {
+    max-width: calc(860px + 2 * var(--gutter));
+    padding-top: var(--space-header);
+    padding-bottom: clamp(56px, 9vw, 88px);
+  }
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--text-meta);
+    color: var(--color-muted);
+  }
+
+  /* The sheet */
+  .sheet {
+    margin-top: 20px;
+    padding: clamp(22px, 5vw, 52px);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-soft);
+    border-top: 3px solid var(--color-accent);
+    border-radius: var(--radius-card);
+    box-shadow:
+      var(--shadow-card),
+      0 18px 40px -24px rgb(20 18 16 / 0.18);
+  }
+  .draft {
+    margin: 0 0 20px;
+    padding: 8px 12px;
+    font-size: var(--text-meta);
+    color: var(--color-venue-fg);
+    background: var(--color-venue-bg);
+    border-radius: var(--radius-card);
+  }
+  .venue {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--text-meta);
+    color: var(--color-muted);
+  }
+  h1 {
+    margin: 16px 0 0;
+    width: fit-content;
+    font-size: clamp(22px, 1.1rem + 1.6vw, 30px);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-strong);
+    text-wrap: balance;
+  }
+  .authors {
+    margin: 12px 0 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--color-muted);
+  }
+  .actions {
+    margin-top: 14px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--color-rule);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .teaser {
+    margin-top: 24px;
+  }
+  /* --fig-width: per-figure max width so in-figure text renders at a consistent size. */
+  .teaser img {
+    display: block;
+    width: 100%;
+    max-width: var(--fig-width, 100%);
+    height: auto;
+    margin-inline: auto;
+  }
+  .teaser.art {
+    aspect-ratio: 16 / 9;
+    background: var(--color-thumb);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+  .teaser.art img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .abstract {
+    margin-top: 28px;
+    padding: 16px 20px;
+    background: var(--color-bg);
+    border-left: 3px solid var(--color-accent);
+  }
+  .abstract .label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: var(--text-micro);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+  }
+  .abstract p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  /* Body: numbered sections like a white paper. */
+  .prose {
+    counter-reset: section;
+    margin-top: 8px;
+    font-size: var(--text-body);
+    line-height: 1.8;
+    color: var(--color-body);
+  }
+  .prose :global(h2) {
+    counter-increment: section;
+    margin: 30px 0 8px;
+    font-size: var(--text-h3);
+    font-weight: 600;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg);
+  }
+  .prose :global(h2)::before {
+    content: counter(section) '.';
+    margin-right: 0.5em;
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--color-accent);
+  }
+  .prose :global(p),
+  .prose :global(ul) {
+    margin: 0 0 12px;
+    text-wrap: pretty;
+  }
+  .prose :global(ul) {
+    padding-left: 1.25em;
+    list-style: disc;
+  }
+  .prose :global(li) {
+    margin-bottom: 6px;
+  }
+  .prose :global(li::marker) {
+    color: var(--color-accent);
+  }
+  /* Inline figure inside the summary text (raw <figure> in Markdown). */
+  .prose :global(figure) {
+    margin: 20px 0 8px;
+  }
+  .prose :global(figure img) {
+    display: block;
+    width: 100%;
+    max-width: var(--fig-width, 100%);
+    height: auto;
+    margin-inline: auto;
+  }
+  .prose :global(figcaption) {
+    margin-top: 8px;
+    font-size: var(--text-small);
+    line-height: 1.6;
+    color: var(--color-muted);
+  }
+  /* Display math ($$…$$, rendered by KaTeX at build time). */
+  .prose :global(.math-display) {
+    margin: 16px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .prose :global(.katex) {
+    font-size: 1.05em;
+  }
+  /* Opening question, set as a pull quote. */
+  .prose :global(blockquote) {
+    margin: 4px 0 16px;
+    padding: 4px 0 4px 16px;
+    border-left: 2px solid var(--color-accent);
+    font-size: 17px;
+    line-height: 1.55;
+    font-weight: 500;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg);
+  }
+  .prose :global(blockquote p) {
+    margin: 0;
+  }
+  .prose :global(strong) {
+    color: var(--color-fg);
+  }
+  .prose :global(a) {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .cite {
+    font-size: var(--text-micro);
+    font-weight: 500;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-pill);
+    padding: 3px 10px;
+  }
+  .cite:hover {
+    background: var(--color-venue-bg);
+  }
+  footer {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-rule);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+  }
+  footer > :global(*) {
+    align-self: stretch;
+  }
+  .related .label {
+    margin: 0 0 12px;
+    font-size: var(--text-micro);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .banners {
+    container-type: inline-size;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+</style>

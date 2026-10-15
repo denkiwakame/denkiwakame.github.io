@@ -1,0 +1,80 @@
+---
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ExternalLink from '../components/ExternalLink.astro';
+import Icon from '../components/Icon.astro';
+
+const profile = (await getEntry('profile', 'me'))!.data;
+const id = profile.cvDriveId;
+if (!id) throw new Error('profile.yaml: cvDriveId is not set, but /cv/ exists');
+const preview = `https://drive.google.com/file/d/${id}/preview`;
+const view = `https://drive.google.com/file/d/${id}/view`;
+const download = `https://drive.google.com/uc?export=download&id=${id}`;
+---
+
+<Base title="CV" description={`Curriculum vitae of ${profile.name}.`}>
+  <main class="page cv">
+    <div class="bar">
+      <a href="/" class="back mono"><Icon name="back" size={12} />{profile.name}</a>
+      <div class="links">
+        <ExternalLink href={view}>open in google drive</ExternalLink>
+        <ExternalLink href={download}>download pdf</ExternalLink>
+      </div>
+    </div>
+    <h1 class="sr-only">Curriculum Vitae — {profile.name}</h1>
+    <!-- Google Drive is another origin, so the PDF is embedded here to keep the transition same-origin. -->
+    <div class="viewer" style="view-transition-name: cv">
+      <iframe src={preview} title={`CV of ${profile.name} (PDF)`} allow="autoplay" loading="eager"></iframe>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .cv {
+    padding-top: clamp(20px, 4vw, 32px);
+    padding-bottom: clamp(32px, 6vw, 56px);
+    max-width: calc(980px + 2 * var(--gutter));
+  }
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px 20px;
+  }
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--text-meta);
+    color: var(--color-muted);
+  }
+  .links {
+    display: flex;
+    gap: 14px;
+  }
+  .viewer {
+    margin-top: 16px;
+    height: calc(100dvh - 170px);
+    min-height: 480px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+  iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+</style>

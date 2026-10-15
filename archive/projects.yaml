@@ -1,0 +1,22 @@
+# Retired project booths. Not loaded by the site (src/content.config.ts only reads src/data/).
+# To bring one back, move the entry into src/data/projects.yaml.
+# Their generative art stays in src/lib/art.ts and is still served at /art/<kind>.svg:
+#   tactile → contour, dsi → radial
+- id: tactile
+  title: Tactile Memory with Soft Robot
+  description: Robust object insertion via masked encoding of tactile history on a compliant wrist — the robot recalls what a contact felt like.
+  art: contour
+  papers: [tactile-memory, tactile-memory-ws]
+  tags: [Manipulation, Tactile]
+  venues: [RA-L 26]
+  links:
+    paper: https://arxiv.org/abs/2601.19275
+    corl ws: https://openreview.net/forum?id=uLE44csBAT
+- id: dsi
+  title: Differential Search Index
+  description: The duality of radiance fields and differentiable search indices — continuous coordinates meet discrete identifiers.
+  art: radial
+  tags: [Robot Learning]
+  venues: [VecDB@VLDB]
+  links:
+    plasma: https://arxiv.org/abs/2508.15436

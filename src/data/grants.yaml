@@ -1,0 +1,16 @@
+# Research grants. Newest first.
+- id: jst-presto
+  program: JST PRESTO
+  role: Principal Investigator
+  subject: 経験の蓄積と想起を司る自律型記憶基盤
+  years: 2025—
+- id: jst-aip-acceleration
+  program: JST AIP Acceleration Research
+  role: Co-Investigator
+  subject: 超高速データサイエンス
+  years: 2023—2026
+- id: jsps-challenging-exploratory
+  program: JSPS Grant-in-Aid for Challenging Research (Exploratory)
+  role: Co-Investigator
+  subject: 群ロボットの身体化における認知メカニズムの解明と制御論の構築
+  years: 2025—2027

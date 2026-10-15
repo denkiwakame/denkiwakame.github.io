@@ -1,0 +1,142 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import Chip from './Chip.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const { project } = Astro.props;
+const { title, description, pinned, art, teaser, venues } = project.data;
+const href = `/projects/${project.id}/`;
+---
+
+<!-- The whole card links to the project page; thumb and title morph via view transitions. -->
+<a href={href} class:list={['card', { pinned }]}>
+  <div class="thumb" style={`view-transition-name: booth-${project.id}`}>
+    {
+      teaser ? (
+        <Image src={teaser} alt="" widths={[320, 640]} sizes="(min-width: 1180px) 270px, 50vw" />
+      ) : (
+        <img src={`/art/${art}.svg`} alt="" width="320" height="200" loading="lazy" decoding="async" />
+      )
+    }
+    {
+      pinned && (
+        <span class="pin">
+          <Icon name="pin" size={11} />
+          PINNED
+        </span>
+      )
+    }
+  </div>
+  <div class="body">
+    <h3 style={`view-transition-name: booth-title-${project.id}`}>{title}</h3>
+    <p>{description}</p>
+    <!-- Cards show venues only; topic tags appear on the project page. -->
+    <div class="chips">
+      {venues.map((v) => <Chip variant="venue">{v}</Chip>)}
+    </div>
+  </div>
+</a>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--color-border-soft);
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition:
+      border-color 0.15s,
+      transform 0.15s;
+  }
+  .card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+  .pinned {
+    border-color: var(--color-accent);
+  }
+  .thumb {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--color-thumb);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+  .thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .pin {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+  .body {
+    padding: 11px 13px 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    flex: 1;
+  }
+  h3 {
+    margin: 0;
+    width: fit-content;
+    color: var(--color-fg);
+    font-size: var(--text-row);
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: var(--tracking-tight);
+    text-wrap: pretty;
+  }
+  .card:hover h3 {
+    color: var(--color-accent);
+  }
+  p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--color-body);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: auto;
+  }
+  .chips :global(.chip) {
+    font-size: 10.5px;
+    padding: 2px 8px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card {
+      transition: none;
+    }
+    .card:hover {
+      transform: none;
+    }
+  }
+</style>

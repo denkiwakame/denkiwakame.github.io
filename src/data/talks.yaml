@@ -1,0 +1,22 @@
+# Newest first. deckId: Speaker Deck player id (oEmbed `player/<id>`). Empty → "スライド準備中" placeholder.
+# venue: optional short label for the orange tag. event: optional link to the event / lecture page.
+- id: ai-coding-utokyo
+  title: AIコーディング入門講座【発展編】AI研究の動向と研究開発への応用：チームにAIを迎えよう
+  venue: Lecture
+  date: Sep 2026
+  deckId: b528eecbeb284bfdb2043f339dd6d3f8
+  link: https://speakerdeck.com/denkiwakame/ai-kodingu-nyuumon-kouza-hattenhen-ai-kenkyuu-no-doukou-to-kenkyuu-kaihatsu-heno-ouyou-chimu-ni-ai-o-mukaeyou
+  event: https://www.meta-school.t.u-tokyo.ac.jp/reskilling/aic2605/
+- id: portable-reproducible-envs
+  title: Portable & Reproducible Research Environments in the Age of AI Agents
+  venue: Lecture
+  date: Jun 2026
+  deckId: 5482b65a7af447149ad1550da22669a1
+  link: https://speakerdeck.com/denkiwakame/portable-and-reproducible-research-environments-in-the-age-of-ai-agents
+  event: https://non-research-tips.github.io/2026.html
+- id: webdb-retrieval-robot-learning
+  title: ロボット学習における大規模検索技術の展開と応用
+  venue: WebDB 招待講演
+  date: Sep 2025
+  deckId: 01e94e3f5dc44dc28411b76ceb3967cf
+  link: https://speakerdeck.com/denkiwakame/robotutoxue-xi-niokeruda-gui-mo-jian-suo-ji-shu-nozhan-kai-toying-yong

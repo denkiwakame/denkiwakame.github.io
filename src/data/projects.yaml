@@ -1,0 +1,34 @@
+# Research "booths" on the top page. Order = display order.
+# art: generated thumbnail pattern (src/lib/art.ts). teaser overrides it when set.
+- id: presto
+  title: Self-Evolving Memory
+  description: Memory infrastructure that lets AI agents and robots keep learning from intermittent streams of experience. Instead of a dataset fixed before training, memory is an ongoing process of accumulation, self-organization, and recall, so agents can autonomously discover and recompose skills and adapt to new environments. We study its retrieval infrastructure, retrieval-augmented robot learning, methods for distilling experience and models, and integration with foundation models. JST PRESTO, principal investigator (2025—).
+  pinned: true
+  art: neural
+  papers: [clap, phase, dgpo, tactile-memory, plasma, mabr]
+  venues: [RA-L, IROS 26, ACL 26, CoRL 26]
+  links:
+    jst presto: https://www.jst.go.jp/kisoken/presto/en/project/1112122/1112122_2025.html
+- id: slm
+  title: Small Language Models (SLMs)
+  description: Small language models (SLMs) are expected to play a central role in large-scale agent orchestration thanks to their low inference cost, yet they face challenges of their own — at 3B parameters and below, limited memory capacity and a sharp drop in agentic abilities such as tool use. We study post-training methods that draw out the capabilities of SLMs, and their integration with non-parametric external memory that compensates for what they lack. Robot foundation models also fall into this size class, making them a promising application.
+  art: halftone
+  papers: [clap, dgpo]
+  press: [nikkei-xtech-slm]
+  tags: [LLM]
+  venues: [ACL 26, CoRL 26]
+- id: anchor
+  title: Distributional Anchoring
+  description: The generalization of foundation models is easily broken by careless post-training. We study distributional anchoring — acquiring new capabilities while staying close to the original, well-generalizing distribution. Low-rank adaptation, co-training, and language-as-action can be viewed as anchoring to that distribution at the weight, data, and output levels, respectively, and distillation as pulling a model toward a well-behaved reference distribution.
+  art: ridgeline
+  papers: [clap, dgpo]
+  press: [nikkei-xtech-opd]
+  tags: [LLM, VLM, VLA]
+  venues: [ACL 26, CoRL 26]
+- id: social
+  title: Social Intelligence
+  description: Rather than referential AI that labels knowledge about the world, we focus on social intelligence — AI that evolves as a member of human society. We study shared memory and skills among agents, coordination among small AI models and robots, and socially aware navigation through crowd modeling.
+  art: knn
+  papers: [swarm-body, mabr, view-birdification-ijcv, view-birdification, l2b]
+  tags: [Multi-Agent, Crowd Modeling, HRI]
+  venues: [CHI 24, IROS 24, IJCV 23, BMVC 21, IROS 20]

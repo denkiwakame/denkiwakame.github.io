@@ -1,0 +1,140 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  title: string;
+  url: string;
+  venue: string;
+  image?: string;
+  description?: string;
+  /** Call to action label. External links get an arrow and open in a new tab. */
+  cta?: string;
+  /** view-transition-name, so the banner can morph into the page it opens. */
+  transitionName?: string;
+}
+const { title, url, venue, image, description, cta = 'Project page', transitionName } = Astro.props;
+const external = /^https?:\/\//.test(url);
+---
+
+<a
+  href={url}
+  class="banner"
+  {...external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+  style={transitionName && `view-transition-name: ${transitionName}; view-transition-class: pub`}
+>
+  <div class="media">
+    {image ? <img src={image} alt="" loading="lazy" decoding="async" /> : <div class="blank" />}
+  </div>
+  <div class="text">
+    <span class="venue mono">{venue}</span>
+    <h3>{title}</h3>
+    {description && <p>{description}</p>}
+    <span class="cta mono">{cta}{external ? <Icon name="arrow" size={11} /> : ' →'}</span>
+  </div>
+</a>
+
+<style>
+  /* The parent list must set container-type: inline-size (stacks below 520px). */
+  .banner {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: var(--color-surface);
+    transition:
+      border-color 0.15s,
+      transform 0.15s;
+  }
+  .banner:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+  .media {
+    position: relative;
+    min-height: 140px;
+    /* White, so transparent PNG teasers do not turn black. */
+    background: var(--color-surface);
+    overflow: hidden;
+  }
+  .media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1);
+  }
+  .banner:hover .media img {
+    transform: scale(1.04);
+  }
+  .text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 16px 18px;
+    border-left: 3px solid var(--color-accent);
+  }
+  .venue {
+    font-size: var(--text-micro);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-bg);
+    background: var(--color-accent);
+    padding: 2px 8px;
+    border-radius: var(--radius-tag);
+  }
+  h3 {
+    margin: 0;
+    font-size: var(--text-row);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg);
+    text-wrap: pretty;
+  }
+  p {
+    margin: 0;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--color-muted);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+  }
+  .cta {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-micro);
+    font-weight: 500;
+    color: var(--color-accent);
+  }
+  @container (width < 520px) {
+    .banner {
+      grid-template-columns: 1fr;
+    }
+    .media {
+      aspect-ratio: 16 / 9;
+      min-height: 0;
+    }
+    .text {
+      border-left: 0;
+      border-top: 3px solid var(--color-accent);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .banner,
+    .media img {
+      transition: none;
+    }
+    .banner:hover,
+    .banner:hover .media img {
+      transform: none;
+    }
+  }
+</style>

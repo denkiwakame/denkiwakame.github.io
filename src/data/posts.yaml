@@ -1,0 +1,7 @@
+# External posts (Notion).
+- { id: pixi-wiki, title: Pixi Wiki, tag: pixi, link: "https://denkiwakame.notion.site/2ba3175c6b6a80d19141f5407c39ad4e?v=2ba3175c6b6a80a7acfe000c6c1b2117" }
+- { id: progress-report, title: How to Report Progress Effectively, tag: research, link: "https://denkiwakame.notion.site/625a3884f3fe4d888150788476c4e8f9" }
+- { id: nvidia-setup, title: "Essential Pointers for Smooth NVIDIA Driver, CUDA, and Docker Integration", tag: cuda, link: "https://denkiwakame.notion.site/Mastering-NVIDIA-Setup-Essential-Pointers-for-Smooth-CUDA-Docker-Integration-64a44a98e7f940c483b6600c927f41f8" }
+- { id: pixi-faiss, title: Setting up a faiss build environment with Pixi, tag: faiss, link: "https://denkiwakame.notion.site/pixi-faiss-14c3175c6b6a80b39eebf2ab8eb7b05d" }
+- { id: numpy-blas, title: How to switch BLAS backends in numpy, tag: numpy, link: "https://denkiwakame.notion.site/pixi-numpy-BLAS-backend-1783175c6b6a80a28886c0334f71e97f" }
+- { id: rust-dotfiles, title: Managing Dotfiles by Rust Tools, tag: dotfiles, link: "https://denkiwakame.notion.site/Shell-Tools-Rust-1693175c6b6a80319e06c71dea5162db" }

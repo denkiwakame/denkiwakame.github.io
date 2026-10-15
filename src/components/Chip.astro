@@ -1,0 +1,36 @@
+---
+interface Props {
+  /** neutral: topic tag · venue: soft orange · accent: solid orange (publication venue) */
+  variant?: 'neutral' | 'venue' | 'accent';
+}
+const { variant = 'neutral' } = Astro.props;
+---
+
+<span class:list={['chip', variant]}><slot /></span>
+
+<style>
+  .chip {
+    display: inline-block;
+    font-size: var(--text-chip);
+    font-weight: 500;
+    line-height: 1.4;
+    padding: 3px 9px;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+  }
+  .neutral {
+    background: var(--color-chip-bg);
+    color: var(--color-chip-fg);
+  }
+  .venue {
+    background: var(--color-venue-bg);
+    color: var(--color-venue-fg);
+  }
+  .accent {
+    font-size: var(--text-micro);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+</style>

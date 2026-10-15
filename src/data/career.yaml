@@ -1,0 +1,12 @@
+# kind: experience | education | break (career break, shown under Service). Order = display order (newest first).
+- { id: osx-senior, kind: experience, years: 2023—, title: Senior Researcher, org: OMRON SINIC X }
+- { id: osx-engineer, kind: experience, years: 2019—2023, title: Research Engineer, org: OMRON SINIC X }
+- { id: fixstars, kind: experience, years: 2017—2019, title: Senior Software Engineer, org: Fixstars }
+- { id: ntt, kind: experience, years: 2015—2017, title: Researcher, org: NTT Labs }
+- { id: hatena, kind: experience, years: 2013—2015, title: Web Application Engineer (part-time), org: Hatena }
+- { id: ibm, kind: experience, years: "2013", title: Research Intern, org: IBM Tokyo Research Laboratory }
+- { id: google, kind: experience, years: "2012", title: Software Engineer Intern (BOLD), org: "Google, Chrome / Native Client" }
+- { id: phd, kind: education, years: 2020—2023, title: Ph.D. in Informatics, org: Kyoto University }
+- { id: ms, kind: education, years: 2013—2015, title: M.S. in Informatics, org: Kyoto University }
+- { id: be, kind: education, years: 2009—2013, title: B.E. in Electrical and Electronic Engineering, org: Kyoto University }
+- { id: maternity-leave, kind: break, years: Jan—May 2024, title: Maternity leave for identical twins }

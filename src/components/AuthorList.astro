@@ -1,0 +1,42 @@
+---
+import type { Author } from '../lib/papers';
+
+interface Props {
+  authors: Author[];
+  /** compact: "R. Kotoge" initials, as in the publication list. */
+  compact?: boolean;
+  /** Meaning of †, shown after the full author list. */
+  daggerNote?: string;
+  /** The mark used for marked authors (default †). */
+  daggerMark?: string;
+}
+const { authors, compact = false, daggerNote, daggerMark = '†' } = Astro.props;
+const hasDagger = authors.some((a) => a.dagger);
+---
+
+<span class="authors">
+  {
+    authors.map((a, i) => (
+      <>
+        <span class:list={{ me: a.me }}>{compact ? a.short : a.name}{a.dagger && <sup>{daggerMark}</sup>}</span>{i < authors.length - 1 && ', '}
+      </>
+    ))
+  }
+  {hasDagger && daggerNote && <span class="note">(<sup>{daggerMark}</sup>{daggerNote})</span>}
+</span>
+
+<style>
+  .me {
+    color: var(--color-fg);
+    font-weight: 500;
+  }
+  sup {
+    font-size: 0.72em;
+    line-height: 0;
+    margin-left: 1px;
+  }
+  .note {
+    margin-left: 0.5em;
+    white-space: nowrap;
+  }
+</style>

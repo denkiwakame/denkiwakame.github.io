@@ -1,0 +1,347 @@
+---
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import CareerList from '../components/CareerList.astro';
+import ExternalLink from '../components/ExternalLink.astro';
+import Icon from '../components/Icon.astro';
+import ListRow from '../components/ListRow.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PubRow from '../components/PubRow.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import TalkCard from '../components/TalkCard.astro';
+import { getOrdered } from '../lib/order';
+import { getPapers } from '../lib/papers';
+import avatar from '../assets/avatar.webp';
+
+const profile = (await getEntry('profile', 'me'))!.data;
+const projects = await getOrdered('projects');
+const talks = await getOrdered('talks');
+const pets = await getOrdered('pets');
+const posts = await getOrdered('posts');
+const career = await getOrdered('career');
+const press = await getOrdered('press');
+const grants = await getOrdered('grants');
+const awards = await getOrdered('awards');
+const careerItems = (kind: 'experience' | 'education' | 'break') =>
+  career.filter((c) => c.data.kind === kind).map((c) => c.data);
+const papers = await getPapers();
+const publications = papers.filter((p) => p.data.type !== 'preprint');
+const preprints = papers.filter((p) => p.data.type === 'preprint');
+const speakerdeck = profile.socials.find((s) => s.kind === 'speakerdeck');
+---
+
+<Base>
+  <header class="page">
+    <div class="hero">
+    <div class="who">
+      <Image src={avatar} alt={profile.name} width={76} height={76} densities={[1, 2]} loading="eager" class="avatar" />
+      <div class="intro">
+        <h1>{profile.name}</h1>
+        <div class="role">{profile.role}&nbsp;·&nbsp;{profile.degree}</div>
+        <div class="socials">
+          {
+            profile.socials.map((s) => (
+              <a href={s.url} aria-label={s.label} title={s.label} rel="me noopener">
+                <Icon name={s.kind} size={s.kind === 'x' ? 14 : 15} />
+              </a>
+            ))
+          }
+          {
+            profile.cvDriveId && (
+              <a href="/cv/" class="cv mono" style="view-transition-name: cv">
+                CV
+              </a>
+            )
+          }
+        </div>
+      </div>
+    </div>
+    <div class="where mono">{profile.location}</div>
+    </div>
+  </header>
+
+  <div class="page"><hr /></div>
+
+  <main>
+    <section class="page first" aria-labelledby="interests">
+      <SectionHeader id="interests" title="Interests" icon="grid" />
+      <div class="booths">
+        {projects.map((p) => <ProjectCard project={p} />)}
+      </div>
+    </section>
+
+    <section class="page" aria-labelledby="talks">
+      <SectionHeader id="talks" title="Talks" icon="screen" />
+      {
+        speakerdeck && (
+          <p class="more">
+            <ExternalLink href={speakerdeck.url}>all slides on speaker deck</ExternalLink>
+          </p>
+        )
+      }
+      <div class="talks">
+        {talks.map((t) => <TalkCard talk={t} />)}
+      </div>
+    </section>
+
+    {
+      press.length > 0 && (
+        <section class="page" aria-labelledby="press">
+          <SectionHeader id="press" title="Press coverage" icon="news" />
+          <div lang="ja">
+            {press.map(({ data }) => (
+              <ListRow href={data.link} title={data.title} aside={data.source} />
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <section class="page" aria-labelledby="pets">
+      <SectionHeader id="pets" title="Pet projects" icon="tool" />
+      <div>
+        {pets.map(({ data }) => <ListRow href={data.link} title={data.title} aside={data.techs} />)}
+      </div>
+    </section>
+
+    <section class="page" aria-labelledby="posts">
+      <SectionHeader id="posts" title="Posts" icon="doc" />
+      <div class="posts">
+        {posts.map(({ data }) => <ListRow href={data.link} title={data.title} aside={data.tag} mono />)}
+      </div>
+    </section>
+
+    <section class="page" aria-labelledby="background">
+      <SectionHeader id="background" title="Background" icon="person" />
+      <div class="background">
+        <CareerList label="Experience" items={careerItems('experience')} />
+        <div class="stack">
+          <CareerList label="Education" items={careerItems('education')} />
+          <div class="service">
+            <div class="label">Service</div>
+            <p>{profile.service}</p>
+          </div>
+          {careerItems('break').length > 0 && <CareerList label="Career break" items={careerItems('break')} />}
+        </div>
+      </div>
+    </section>
+
+    <section class="page" aria-labelledby="grants">
+      <SectionHeader id="grants" title="Grants & Awards" icon="award" />
+      <div class="background">
+        <CareerList
+          label="Research grants"
+          items={grants.map(({ data }) => ({ years: data.years, title: `${data.program} — ${data.role}`, org: data.subject }))}
+        />
+        <CareerList label="Awards" items={awards.map(({ data }) => ({ years: data.year, title: data.title, org: data.org }))} />
+      </div>
+    </section>
+
+    <section class="page" aria-labelledby="publications">
+      <SectionHeader id="publications" title="Publications" icon="book" meta={`${publications.length} entries`} />
+      <div class="pubs">
+        {publications.map((p) => <PubRow paper={p} />)}
+      </div>
+    </section>
+
+    <section class="page last" aria-labelledby="preprints">
+      <SectionHeader id="preprints" title="Preprints" icon="doc" meta={`${preprints.length} entries`} />
+      <div class="pubs">
+        {preprints.map((p) => <PubRow paper={p} />)}
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style>
+  header.page {
+    container-type: inline-size;
+    padding-top: var(--space-header);
+  }
+  .hero {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: 16px 40px;
+  }
+  .where {
+    font-size: var(--text-meta);
+    font-weight: 500;
+    color: var(--color-subtle);
+    text-align: right;
+  }
+  @container (width < 760px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+    .where {
+      text-align: left;
+    }
+  }
+  .who {
+    display: flex;
+    gap: 22px;
+    align-items: flex-start;
+  }
+  .avatar {
+    width: 76px;
+    height: 76px;
+    border-radius: var(--radius-avatar);
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+  }
+  .intro {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  h1 {
+    margin: 0;
+    font-size: var(--text-h1);
+    font-weight: 600;
+    letter-spacing: var(--tracking-display);
+    line-height: 1;
+    color: var(--color-fg-strong);
+  }
+  .role {
+    font-size: 13.5px;
+    color: var(--color-muted);
+  }
+  .socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-card);
+    color: var(--color-subtle);
+    background: var(--color-surface);
+  }
+  .socials a:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+  .socials .cv {
+    width: auto;
+    padding: 0 10px;
+    font-size: var(--text-meta);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--color-on-accent);
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+  .socials .cv:hover {
+    color: var(--color-on-accent);
+    filter: brightness(1.08);
+  }
+  hr {
+    margin: 32px 0 0;
+    border: 0;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  section {
+    padding-top: var(--space-section);
+    container-type: inline-size;
+  }
+  section.first {
+    padding-top: clamp(32px, 5vw, 44px);
+  }
+  section.last {
+    padding-bottom: clamp(56px, 9vw, 88px);
+  }
+
+  /* Grids adapt to the section width (container queries); .pubs is the container for PubRow. */
+  .pubs {
+    container-type: inline-size;
+  }
+  .booths > :global(*),
+  .talks > :global(*) {
+    min-width: 0;
+  }
+  .booths {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .talks {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    align-items: start;
+  }
+  .background {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 38px;
+  }
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .service .label {
+    font-size: var(--text-meta);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 14px;
+  }
+  .service p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--color-muted);
+  }
+  .posts :global(.title) {
+    font-size: 13.5px;
+    font-weight: 400;
+  }
+  .pubs {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .more {
+    margin: -6px 0 16px;
+    text-align: right;
+  }
+  @container (width < 900px) {
+    .booths {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  @container (width < 680px) {
+    .booths {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+  }
+  @container (width < 900px) {
+    .talks {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @container (width < 720px) {
+    .background {
+      grid-template-columns: 1fr;
+    }
+  }
+  @container (width < 560px) {
+    .talks {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (width < 640px) {
+    }
+</style>

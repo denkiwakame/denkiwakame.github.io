@@ -1,0 +1,73 @@
+---
+interface Props {
+  bibtex: string;
+}
+const { bibtex } = Astro.props;
+---
+
+<section id="bibtex" class="bib" aria-labelledby="bibtex-label">
+  <div class="bar">
+    <span id="bibtex-label" class="label mono">BibTeX</span>
+    <button type="button" class="copy mono" data-copy-bibtex hidden>copy</button>
+  </div>
+  <!-- Click selects everything, so copy-paste works even without JS. -->
+  <pre class="mono">{bibtex}</pre>
+</section>
+
+<script>
+  // Progressive enhancement: show a copy button only where the Clipboard API exists.
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-copy-bibtex]')) {
+    const pre = button.closest('.bib')?.querySelector('pre');
+    if (!pre || !navigator.clipboard) continue;
+    button.hidden = false;
+    button.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(pre.textContent ?? '');
+      button.textContent = 'copied';
+      setTimeout(() => (button.textContent = 'copy'), 1600);
+    });
+  }
+</script>
+
+<style>
+  .bib {
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-card);
+    background: var(--color-bg);
+    overflow: hidden;
+  }
+  .bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+  .label {
+    font-size: var(--text-micro);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+  }
+  .copy {
+    font-size: var(--text-meta);
+    font-weight: 500;
+    color: var(--color-accent);
+    background: var(--color-surface);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-pill);
+    padding: 2px 12px;
+    cursor: pointer;
+  }
+  .copy:hover {
+    background: var(--color-venue-bg);
+  }
+  pre {
+    margin: 0;
+    padding: 14px;
+    font-size: 12px;
+    line-height: 1.65;
+    color: var(--color-body);
+    overflow-x: auto;
+    user-select: all;
+  }
+</style>

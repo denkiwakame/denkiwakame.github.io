@@ -1,0 +1,185 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+
+interface Props {
+  /** Demo videos / GIFs. Still figures belong in the summary text instead. */
+  demos: CollectionEntry<'summaries'>['data']['demos'];
+}
+const { demos } = Astro.props;
+const many = demos.length > 1;
+---
+
+<!--
+  Demo videos / GIFs as a horizontal scroll-snap carousel. Swipe / trackpad / scrollbar work without JS;
+  the arrow buttons are a small progressive enhancement.
+-->
+<div class:list={['carousel', { many }]} data-carousel>
+  <div class="label mono">Demos</div>
+  <div class="track" tabindex="0" aria-label="Demos">
+    {
+      demos.map((demo, i) => (
+        <figure class="slide" aria-label={`Demo ${i + 1} of ${demos.length}`}>
+          <div class="media">
+            {demo.video ? (
+              <video src={demo.video} autoplay muted loop playsinline preload="metadata" aria-label={demo.caption} />
+            ) : (
+              <img src={demo.url} alt={demo.caption} loading="lazy" decoding="async" />
+            )}
+          </div>
+          <figcaption>{demo.caption}</figcaption>
+        </figure>
+      ))
+    }
+  </div>
+  {
+    many && (
+      <div class="controls" hidden data-controls>
+        <span class="count mono" data-count>
+          1 / {demos.length}
+        </span>
+        <button type="button" class="arrow" data-prev aria-label="Previous demo">
+          <Icon name="back" size={14} />
+        </button>
+        <button type="button" class="arrow next" data-next aria-label="Next demo">
+          <Icon name="back" size={14} />
+        </button>
+      </div>
+    )
+  }
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-carousel]')) {
+    const track = root.querySelector<HTMLElement>('.track')!;
+    const controls = root.querySelector<HTMLElement>('[data-controls]');
+    if (!controls) continue;
+    const slides = [...track.querySelectorAll<HTMLElement>('.slide')];
+    const prev = controls.querySelector<HTMLButtonElement>('[data-prev]')!;
+    const next = controls.querySelector<HTMLButtonElement>('[data-next]')!;
+    const count = controls.querySelector<HTMLElement>('[data-count]')!;
+    controls.hidden = false;
+
+    const current = () => {
+      const left = track.scrollLeft;
+      return slides.reduce((best, s, i) => (Math.abs(s.offsetLeft - left) < Math.abs(slides[best].offsetLeft - left) ? i : best), 0);
+    };
+    const go = (i: number) => track.scrollTo({ left: slides[Math.max(0, Math.min(slides.length - 1, i))].offsetLeft, behavior: 'smooth' });
+    const update = () => {
+      const i = current();
+      count.textContent = `${i + 1} / ${slides.length}`;
+      prev.disabled = i === 0;
+      next.disabled = i === slides.length - 1;
+    };
+    prev.addEventListener('click', () => go(current() - 1));
+    next.addEventListener('click', () => go(current() + 1));
+    track.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') (e.preventDefault(), go(current() + 1));
+      if (e.key === 'ArrowLeft') (e.preventDefault(), go(current() - 1));
+    });
+    update();
+  }
+</script>
+
+<style>
+  .carousel {
+    margin-top: 32px;
+  }
+  .label {
+    margin-bottom: 10px;
+    font-size: var(--text-micro);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    position: relative;
+  }
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+  .track:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+  .slide {
+    flex: 0 0 100%;
+    margin: 0;
+    scroll-snap-align: start;
+  }
+  /* Next slide peeks in so it is obvious there is more. */
+  .many .slide {
+    flex-basis: 88%;
+  }
+  .media {
+    aspect-ratio: 16 / 10;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+  .media :is(img, video) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  figcaption {
+    margin-top: 10px;
+    font-size: var(--text-small);
+    line-height: 1.6;
+    color: var(--color-muted);
+  }
+  .controls {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  .controls[hidden] {
+    display: none;
+  }
+  .count {
+    margin-right: auto;
+    font-size: var(--text-meta);
+    color: var(--color-muted);
+  }
+  .arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    color: var(--color-fg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+  }
+  .arrow:hover:not(:disabled) {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+  .arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+  .next :global(svg) {
+    transform: scaleX(-1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .track {
+      scroll-behavior: auto;
+    }
+  }
+</style>

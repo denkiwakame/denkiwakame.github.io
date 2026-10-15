@@ -1,0 +1,73 @@
+/*
+ * Design tokens — the only place colors, radii, shadows and type sizes are defined.
+ * Source: Claude Design "Poster Hall (Light)".
+ */
+:root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --color-bg: #f7f7f5;
+  --color-surface: #ffffff;
+  --color-thumb: #f2f1ee;
+  --color-sunken: #efefec;
+  --color-selection: #e5e5e1;
+
+  /* Text */
+  --color-fg: #18181b;
+  --color-fg-strong: #0e0e0d;
+  --color-body: #3c3c39;
+  --color-muted: #6b6b65;
+  --color-subtle: #63635e;
+
+  /* Lines */
+  --color-border: #e2e2de;
+  --color-border-soft: #e4e4e1;
+  --color-rule: #eaeae7;
+
+  /* Accent */
+  --color-accent: #c2410c;
+  --color-on-accent: #fff7f2;
+
+  /* Chips */
+  --color-chip-bg: #f0f0ed;
+  --color-chip-fg: #5c5c57;
+  --color-venue-bg: #fce9de;
+  --color-venue-fg: #9a3412;
+
+  /* Shape */
+  --radius-card: 4px;
+  --radius-tag: 2px;
+  --radius-avatar: 14px;
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 2px rgb(20 18 16 / 0.05);
+
+  /* Type */
+  --font-sans: var(--font-geist), -apple-system, 'Helvetica Neue', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, 'SFMono-Regular', monospace;
+  --text-h1: 32px;
+  --text-h2: 15.5px;
+  --text-h3: 16px;
+  --text-body: 14.5px;
+  --text-row: 14px;
+  --text-small: 12.5px;
+  --text-meta: 11.5px;
+  --text-chip: 11px;
+  --text-micro: 10.5px;
+  --tracking-tight: -0.02em;
+  --tracking-display: -0.035em;
+
+  /* Layout */
+  --page-max: 1180px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --space-section: clamp(36px, 6vw, 56px);
+  --space-header: clamp(32px, 6vw, 52px);
+}
+
+/*
+ * Dark theme: placeholder. Values to be designed; toggle is not implemented yet.
+ * Fill these in, then add the prefers-color-scheme block:
+ *   @media (prefers-color-scheme: dark) { :root:not([data-theme='light']) { ... } }
+ */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}

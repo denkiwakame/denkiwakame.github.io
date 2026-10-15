@@ -1,0 +1,61 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  href: string;
+  title: string;
+  /** Right-aligned secondary text (tech stack or tag). */
+  aside: string;
+  mono?: boolean;
+}
+const { href, title, aside, mono = false } = Astro.props;
+---
+
+<!-- External entries: always open in a new tab, marked with an arrow icon. -->
+<a href={href} class="row" target="_blank" rel="noopener noreferrer">
+  <span class="title">
+    {title}
+    <span class="ext" aria-label="(opens in a new tab)"><Icon name="arrow" size={11} /></span>
+  </span>
+  <span class:list={['aside', { mono }]}>{aside}</span>
+</a>
+
+<style>
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-rule);
+  }
+  .row:hover {
+    background: var(--color-surface);
+  }
+  .ext {
+    display: inline-block;
+    margin-left: 4px;
+    vertical-align: -1px;
+    color: var(--color-muted);
+  }
+  .ext :global(svg) {
+    display: inline;
+  }
+  .row:hover .ext {
+    color: var(--color-accent);
+  }
+  .title {
+    font-size: var(--text-row);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .aside {
+    font-size: var(--text-meta);
+    color: var(--color-muted);
+    text-align: right;
+  }
+  .aside.mono {
+    font-size: var(--text-chip);
+    white-space: nowrap;
+  }
+</style>
