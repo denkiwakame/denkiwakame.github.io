@@ -15,11 +15,23 @@ me:
   socials:
     - { kind: github, label: github, url: "https://github.com/denkiwakame" }
     - { kind: x, label: twitter, url: "https://twitter.com/denkivvakame" }
-    - { kind: linkedin, label: linkedin, url: "https://www.linkedin.com/in/mai-nishimura-86930b62" }
-    - { kind: scholar, label: google scholar, url: "https://scholar.google.com/citations?user=he1RdFcAAAAJ" }
+    - {
+        kind: linkedin,
+        label: linkedin,
+        url: "https://www.linkedin.com/in/mai-nishimura-86930b62",
+      }
+    - {
+        kind: scholar,
+        label: google scholar,
+        url: "https://scholar.google.com/citations?user=he1RdFcAAAAJ",
+      }
     - { kind: dblp, label: dblp, url: "https://dblp.org/pid/176/1422.html" }
-    - { kind: speakerdeck, label: speaker deck, url: "https://speakerdeck.com/denkiwakame" }
-    - { kind: mail, label: mail, url: "mailto:denkivvakam@gmail.com" }
+    - {
+        kind: speakerdeck,
+        label: speaker deck,
+        url: "https://speakerdeck.com/denkiwakame",
+      }
+    - { kind: mail, label: mail, url: "mailto:denkivvakame@gmail.com" }
   # CV PDF on Google Drive (must be shared as "anyone with the link"). Shown at /cv/.
   cvDriveId: 1VncOzItkZo0axVL2wytTzauSFmwt3v2i
   service: Reviewer — ICCV 2023, CVPR 2023, IROS 2023–2024, ICRA 2024, TPAMI, WACV 2022, ICPR 2022, 3DV 2020–2021, MVA 2021
