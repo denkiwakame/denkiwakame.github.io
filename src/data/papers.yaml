@@ -1,3 +1,29 @@
+- id: point-hand
+  title: "What Novice Operators See Changes What the Policy Learns: A User Study of Keypoint Hand Visual Representation for Teleoperated Demonstration"
+  authors:
+    - amane-yamaguchi
+    - shohei-kamiguchi
+    - masashi-hamaya
+    - shigeo-yoshida
+    - takuji-narumi
+    - mai-nishimura
+  venue: arXiv
+  abbrev: arXiv
+  year: 2026
+  type: preprint
+  teaserUrl: https://omron-sinicx.github.io/point-hand/teaser.png
+  arxiv: "2610.27907"
+  links:
+    paper: https://arxiv.org/abs/2610.27907
+    project: https://omron-sinicx.github.io/point-hand/
+    video: https://www.youtube.com/watch?v=XYWDglNkfMA
+  bibtex: |
+    @article{yamaguchi2026novice,
+      title={What Novice Operators See Changes What the Policy Learns: A User Study of Keypoint Hand Visual Representation for Teleoperated Demonstration},
+      author={Yamaguchi, Amane and Kamiguchi, Shohei and Hamaya, Masashi and Yoshida, Shigeo and Narumi, Takuji and Nishimura, Mai},
+      journal={arXiv preprint arXiv:2610.27907},
+      year={2026}
+    }
 - id: clap
   title: "CLAP: Direct VLM-to-VLA Adaptation via Language-Action Grounding"
   authors:

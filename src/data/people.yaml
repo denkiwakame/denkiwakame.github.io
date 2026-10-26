@@ -1,3 +1,5 @@
+- id: amane-yamaguchi
+  name: Amane Yamaguchi
 - id: asako-kanezaki
   name: Asako Kanezaki
 - id: cristian-beltran-hernandez
@@ -53,6 +55,8 @@
   name: Shigeo Yoshida
 - id: shinya-shimizu
   name: Shinya Shimizu
+- id: shohei-kamiguchi
+  name: Shohei Kamiguchi
 - id: shohei-nobuhara
   name: Shohei Nobuhara
 - id: so-kuroki
@@ -63,6 +67,8 @@
   name: Sotetsu Iwamura
 - id: tadashi-kozuno
   name: Tadashi Kozuno
+- id: takuji-narumi
+  name: Takuji Narumi
 - id: takashi-matsuyama
   name: Takashi Matsuyama
 - id: takayuki-nishio
