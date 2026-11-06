@@ -1,0 +1,140 @@
+---
+/**
+ * A poster link that opens the remote PDF in a modal.
+ * Progressive enhancement: without JS, on phones (no inline PDF rendering) and in
+ * browsers without `popover`, it stays a plain link. The native `popover` attribute
+ * handles open, close, Esc and light dismiss; the script only swaps the link for the
+ * button and sets the iframe src on first open (Chrome ignores loading="lazy" on
+ * hidden iframes, so a static src would download every poster on page load).
+ * Only use for hosts that allow framing (e.g. GitHub Pages), not arXiv/OpenReview.
+ */
+import Icon from './Icon.astro';
+
+interface Props {
+  href: string;
+  /** Unique per page: used as the popover id. */
+  id: string;
+  label?: string;
+  title?: string;
+  /** Poster width / height. CoRL posters so far are 2:1 landscape. */
+  aspect?: number;
+}
+const { href, id, label = 'poster', title = 'Poster', aspect = 2 } = Astro.props;
+const popId = `poster-${id}`;
+---
+
+<span class="poster">
+  <button type="button" class="trigger mono" popovertarget={popId} hidden>{label}</button>
+  <a class="fallback mono" href={href} rel="noopener">{label}</a>
+  <div popover id={popId} class="modal" style={`--aspect: ${aspect}`}>
+    <div class="bar">
+      <span class="name mono">{title}</span>
+      <a class="newtab mono" href={href} target="_blank" rel="noopener">open in new tab<Icon name="arrow" size={11} /></a>
+      <button type="button" class="close mono" popovertarget={popId} popovertargetaction="hide" aria-label="Close">close ✕</button>
+    </div>
+    <iframe data-src={`${href}#navpanes=0&view=FitH`} title={title}></iframe>
+  </div>
+</span>
+
+<script>
+  // Progressive enhancement: modal only where popover exists and not on touch devices.
+  if ('popover' in HTMLElement.prototype && !matchMedia('(pointer: coarse)').matches) {
+    for (const modal of document.querySelectorAll<HTMLElement>('.poster > [popover]')) {
+      const wrap = modal.parentElement!;
+      wrap.querySelector<HTMLElement>('.trigger')!.hidden = false;
+      wrap.querySelector<HTMLElement>('.fallback')!.hidden = true;
+      modal.addEventListener('toggle', (e) => {
+        const frame = modal.querySelector('iframe')!;
+        if ((e as ToggleEvent).newState === 'open' && !frame.src) frame.src = frame.dataset.src!;
+      });
+    }
+  }
+</script>
+
+<style>
+  .poster {
+    display: contents;
+  }
+  .trigger,
+  .fallback {
+    font: inherit;
+    font-size: var(--text-micro);
+    font-weight: 500;
+    color: var(--color-accent);
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+  .trigger:hover,
+  .fallback:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .trigger[hidden],
+  .fallback[hidden] {
+    display: none;
+  }
+
+  /* Size the modal to the poster: width from the viewport, or from the height
+     left after the bar and the PDF viewer toolbar, whichever is smaller. */
+  .modal {
+    --bar: 38px;
+    --viewer-toolbar: 56px;
+    width: min(100vw - 2 * var(--gutter), (94dvh - var(--bar) - var(--viewer-toolbar)) * var(--aspect));
+    height: auto;
+    max-height: 94dvh;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    container-type: inline-size;
+  }
+  .modal:popover-open {
+    display: flex;
+    flex-direction: column;
+  }
+  .modal::backdrop {
+    background: var(--color-backdrop);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color-rule);
+    font-size: var(--text-meta);
+  }
+  .name {
+    margin-right: auto;
+    color: var(--color-muted);
+  }
+  .newtab {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-accent);
+  }
+  .close {
+    font: inherit;
+    color: var(--color-body);
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+  .newtab:hover,
+  .close:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  iframe {
+    display: block;
+    width: 100%;
+    height: calc(100cqi / var(--aspect) + var(--viewer-toolbar));
+    border: 0;
+    background: var(--color-thumb);
+  }
+</style>

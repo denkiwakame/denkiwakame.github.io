@@ -1,6 +1,7 @@
 ---
 import AuthorList from './AuthorList.astro';
 import Chip from './Chip.astro';
+import PosterModal from './PosterModal.astro';
 import { resolveAuthors, type Paper } from '../lib/papers';
 
 interface Props {
@@ -11,17 +12,21 @@ const { title, year, abbrev, venue, links } = paper.data;
 const authors = await resolveAuthors(paper);
 ---
 
-<!-- Row and title share view-transition names with the detail page header, so the row expands into it. -->
-<div class="row" style={`view-transition-name: pub-${paper.id}; view-transition-class: pub`}>
+<!-- The row and title morph into the detail page header. Their view-transition-names are set
+     only for the paper being opened or returned from (script in Base.astro): naming every row
+     made each navigation capture dozens of elements. -->
+<div class="row" data-pub={paper.id}>
   <span class="year mono">{year}</span>
   <div class="main">
-    <a class="title" href={`/publications/${paper.id}/`} style={`view-transition-name: pub-title-${paper.id}`}>{title}</a>
+    <a class="title" href={`/publications/${paper.id}/`} data-pub-title>{title}</a>
     <div class="authors"><AuthorList authors={authors} daggerNote={paper.data.daggerNote} daggerMark={paper.data.daggerMark} compact /></div>
   </div>
   <div class="side">
     <span title={venue}><Chip variant="accent">{abbrev}</Chip></span>
     <div class="links mono">
-      {Object.entries(links).map(([label, href]) => <a href={href} rel="noopener">{label}</a>)}
+      {Object.entries(links).map(([label, href]) =>
+        label === 'poster' ? <PosterModal href={href} id={paper.id} title={`Poster: ${title}`} /> : <a href={href} rel="noopener">{label}</a>,
+      )}
     </div>
   </div>
 </div>

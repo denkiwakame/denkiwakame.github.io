@@ -49,6 +49,7 @@
     paper: https://arxiv.org/abs/2607.08974
     project: https://omron-sinicx.github.io/clap/
     code: https://github.com/omron-sinicx/clap
+    poster: https://omron-sinicx.github.io/clap/clap_corl2026.pdf
   bibtex: |
     @inproceedings{ishitoya2026clap,
       title={CLAP: Direct VLM-to-VLA Adaptation via Language-Action Grounding},
@@ -62,6 +63,38 @@
       url: https://omron-sinicx.github.io/dgpo/
       image: https://omron-sinicx.github.io/dgpo/acl26_fig2_v3.png
       description: Distillation-Guided Policy Optimization (DGPO), a two-phase training framework combining cold-start knowledge distillation and selective teacher-guided reinforcement learning.
+- id: calm-ws
+  title: "Lost in Translation? Democratizing VLAs through Language-Anchored VLM-to-VLA Adaptation"
+  authors:
+    - yuri-ishitoya
+    - haruto-suzuki
+    - jeremy-siburian
+    - masashi-hamaya
+    - kuniaki-saito
+    - toshihiko-fukushima
+    - cristian-beltran-hernandez
+    - mai-nishimura
+  dagger:
+    - yuri-ishitoya
+    - haruto-suzuki
+    - jeremy-siburian
+    - mai-nishimura
+  venue: "CoRL Workshop on Efficient Foundation Models for Real-Time Embodied AI"
+  abbrev: CoRL WS
+  year: 2026
+  type: workshop
+  links:
+    openreview: https://openreview.net/forum?id=OCvjNpgmnT
+    poster: https://omron-sinicx.github.io/clap/calm_corl2026.pdf
+    project: https://omron-sinicx.github.io/clap/
+  bibtex: |
+    @misc{ishitoya2026lost,
+      title={Lost in Translation? Democratizing VLAs through Language-Anchored VLM-to-VLA Adaptation},
+      author={Yuri Ishitoya and Haruto Suzuki and Jeremy Siburian and Masashi Hamaya and Kuniaki Saito and Toshihiko Fukushima and Cristian C. Beltran-Hernandez and Mai Nishimura},
+      howpublished={CoRL 2026 Workshop on Efficient Foundation Models for Real-Time Embodied AI},
+      note={\url{https://openreview.net/forum?id=OCvjNpgmnT}},
+      year={2026}
+    }
 - id: phase
   title: "PHASE: Compliance-Enabled Tactile Phase Retrieval for Few-Shot Insertion Learning"
   authors:

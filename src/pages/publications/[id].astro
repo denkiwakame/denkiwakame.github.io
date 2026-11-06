@@ -9,6 +9,7 @@ import BibtexBlock from '../../components/BibtexBlock.astro';
 import Chip from '../../components/Chip.astro';
 import ExternalLink from '../../components/ExternalLink.astro';
 import Icon from '../../components/Icon.astro';
+import PosterModal from '../../components/PosterModal.astro';
 import FigureCarousel from '../../components/FigureCarousel.astro';
 import RelatedBanner from '../../components/RelatedBanner.astro';
 import { artFor } from '../../lib/art';
@@ -68,7 +69,9 @@ const jsonLd = {
         <h1 style={`view-transition-name: pub-title-${paper.id}`}>{title}</h1>
         <p class="authors"><AuthorList authors={authors} daggerNote={paper.data.daggerNote} daggerMark={paper.data.daggerMark} /></p>
         <div class="actions">
-          {Object.entries(links).map(([label, href]) => <ExternalLink href={href}>{label}</ExternalLink>)}
+          {Object.entries(links).map(([label, href]) =>
+            label === 'poster' ? <PosterModal href={href} id={paper.id} title={`Poster: ${title}`} /> : <ExternalLink href={href}>{label}</ExternalLink>,
+          )}
           <a href="#bibtex" class="cite mono">cite ↓</a>
         </div>
       </header>

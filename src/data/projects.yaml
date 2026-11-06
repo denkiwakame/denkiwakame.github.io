@@ -21,7 +21,7 @@
   title: Distributional Anchoring
   description: "The generalization of foundation models is easily broken by careless post-training. We study distributional anchoring: acquiring new capabilities while staying close to the original, well-generalizing distribution. Low-rank adaptation, co-training, and language-as-action can be viewed as anchoring to that distribution at the weight, data, and output levels, respectively, and distillation as pulling a model toward a well-behaved reference distribution."
   art: ridgeline
-  papers: [clap, dgpo]
+  papers: [clap, calm-ws, dgpo]
   press: [nikkei-xtech-opd]
   tags: [LLM, VLM, VLA]
   venues: [ACL 26, CoRL 26]

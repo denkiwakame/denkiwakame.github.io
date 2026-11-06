@@ -53,6 +53,34 @@ const ogImage = new URL(image, Astro.site);
     <Font cssVariable="--font-geist" preload={[{ weight: 400 }, { weight: 600 }]} />
     <Font cssVariable="--font-geist-mono" />
     <slot name="head" />
+    <!--
+      Publication row <-> detail page morph. Naming every row made each navigation capture
+      dozens of elements, so only the row of the paper being opened (or returned from) gets a
+      view-transition-name, and only for that transition. Inline in <head> so the pagereveal
+      listener exists before the first render. Without JS (or the Navigation API) it is a fade.
+    -->
+    <script is:inline>
+      (() => {
+        const idOf = (url) => url && new URL(url).pathname.match(/^\/publications\/([^/]+)\/$/)?.[1];
+        const name = (id, vt) => {
+          const row = id && document.querySelector(`[data-pub="${CSS.escape(id)}"]`);
+          if (!row || !vt) return;
+          const title = row.querySelector('[data-pub-title]');
+          row.style.viewTransitionName = `pub-${id}`;
+          row.style.viewTransitionClass = 'pub';
+          if (title) title.style.viewTransitionName = `pub-title-${id}`;
+          // Clear afterwards, so a page restored from the back/forward cache starts clean.
+          vt.finished.finally(() => {
+            row.style.viewTransitionName = row.style.viewTransitionClass = '';
+            if (title) title.style.viewTransitionName = '';
+          });
+        };
+        // Leaving a list for /publications/<id>/: name the clicked row.
+        addEventListener('pageswap', (e) => name(idOf(e.activation?.entry?.url), e.viewTransition));
+        // Arriving at a list from /publications/<id>/: name that paper's row.
+        addEventListener('pagereveal', (e) => name(idOf(window.navigation?.activation?.from?.url), e.viewTransition));
+      })();
+    </script>
   </head>
   <body>
     <slot />

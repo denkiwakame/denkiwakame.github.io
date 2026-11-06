@@ -11,6 +11,7 @@
   --color-thumb: #f2f1ee;
   --color-sunken: #efefec;
   --color-selection: #e5e5e1;
+  --color-backdrop: rgb(14 14 13 / 0.45);
 
   /* Text */
   --color-fg: #18181b;

@@ -8,7 +8,7 @@ Personal research portfolio of Mai Nishimura. Astro 7, static output, deployed t
 - Colors, spacing, radii, fonts: only via `src/styles/tokens.css`. No raw hex in components.
 - No CSS framework: plain scoped `<style>` in each component, values from tokens. Do not add Tailwind, daisyUI, or similar.
 - New components use container queries, not viewport breakpoints.
-- Zero client JS by default. Ask before adding any `<script>` or framework island. Approved exceptions: the BibTeX copy button (`BibtexBlock.astro`) and the figure carousel arrows (`FigureCarousel.astro`, CSS scroll-snap does the rest). Both must work without JS.
+- Zero client JS by default. Ask before adding any `<script>` or framework island. Approved exceptions: the BibTeX copy button (`BibtexBlock.astro`), the figure carousel arrows (`FigureCarousel.astro`, CSS scroll-snap does the rest), the poster modal (`PosterModal.astro`, sets the iframe src on open), and the publication morph (inline script in `Base.astro`, names only the row being opened or returned from). All must work without JS.
 - Never set `reviewed: true` on a summary. Only the author does that.
 - Before finishing any task: `npm run check && npm run build` must pass.
 - For design work or new components, follow the `design-rules` skill.

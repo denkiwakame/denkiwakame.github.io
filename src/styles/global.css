@@ -34,18 +34,18 @@ html {
   navigation: auto;
 }
 ::view-transition-group(*) {
-  animation-duration: 0.38s;
+  animation-duration: 0.32s;
   animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
 }
 /* Publication row → detail header: stretch the box, crossfade its contents. */
 ::view-transition-group(*.pub) {
-  animation-duration: 0.45s;
+  animation-duration: 0.36s;
 }
 ::view-transition-old(root) {
-  animation: 0.2s ease-in both vt-fade-out;
+  animation: 0.16s ease-in both vt-fade-out;
 }
 ::view-transition-new(root) {
-  animation: 0.32s cubic-bezier(0.2, 0, 0, 1) 0.06s both vt-rise-in;
+  animation: 0.26s cubic-bezier(0.2, 0, 0, 1) 0.05s both vt-rise-in;
 }
 @keyframes vt-fade-out {
   to {
