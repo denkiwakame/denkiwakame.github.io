@@ -1,32 +1,38 @@
 ---
 paper: clap
-tldr: CLAP turns a pretrained VLM into a VLA by predicting a short natural-language action description before the numeric action tokens, with no action expert or architecture change.
+tldr: CLAP turns a pretrained VLM into a VLA by prepending a natural-language action plan to each numeric action chunk, with no architectural change. 2B CLAP reaches 90.8% on LIBERO (+14.9 pt over VLA-0).
 demos:
+  - url: https://omron-sinicx.github.io/clap/2b_in.gif
+    caption: "In-distribution rollout of CLAP (2B): \"grasp carrot and drop it onto the plate\"."
   - url: https://omron-sinicx.github.io/clap/2b_ood.gif
-    caption: "Out-of-distribution rollout of CLAP (2B): \"pick up tomato and place it on the plate\"."
-reviewed: true
+    caption: "Out-of-distribution rollout of CLAP (2B), with unseen distractors: \"pick up tomato and place it on the plate\"."
+reviewed: false
 ---
 
 ## Motivation
 
 > What would it take to make VLA research as accessible as VLM research?
 
-Vision-language-action models (VLAs) are built by fine-tuning pretrained VLMs on robot data, often with extra action experts, diffusion heads, and large-scale robot pretraining. This complexity makes it hard to isolate what the VLM itself contributes to control, and to carry advances from the broader VLM community over to robots. The paper traces much of it to an *output-distribution mismatch*: a VLM pretrained to generate structured language is trained to emit bare action tokens such as "4 12 98 3 0 0", which carry little of its pretrained linguistic or spatial structure. Compact VLAs may be especially sensitive to this shift.
+VLAs inherit rich semantic capabilities from pretrained VLMs, yet fine-tuning on robot actions can silently collapse them: predicting bare numeric action tokens pulls generation far from the pretrained language distribution, degrading multimodal understanding, spatial reasoning, and generalization. Existing VLM-to-VLA approaches each leave something on the table. Language-only action representations stay close to the VLM but are too imprecise for low-level control or still need an action expert; capability-preserving methods add extra modules, gradient-blocking schemes, or co-training data; compact VLAs are usually released at a single fixed scale.
 
 ## Approach
 
-CLAP (Causal Language-Action Prediction) changes only the target output sequence. Before the discretized action tokens, the model generates a short description of the action chunk, such as "move back 0.5 cm, move up 3.5 cm, …, open gripper". During training, this prefix is produced from the ground-truth actions by a fixed template, so no manual annotation is needed, and every action token is causally conditioned on it. Backbone, tokenizer, output head, and loss stay unchanged; masking input action tokens is an optional augmentation. CLAP is instantiated on Qwen3.5 at 0.8B, 2B, and 4B.
+CLAP (Causal Language-Action Prediction) first generates a short natural-language description of the intended motion, then predicts the discrete action tokens conditioned on it. Because generation is autoregressive, each action token causally attends to this description, making it a conditioning intermediate rather than an auxiliary output. During training, a fixed template generates the description deterministically from the ground-truth action chunk ("move forward 3 cm, tilt right 1 degree, close gripper"), and the model is trained on the concatenated sequence with the standard cross-entropy objective. CLAP changes only the output representation: no action expert, vocabulary change, architectural change, or manual annotation.
 
-![Overview (Fig. 2 in the paper). Training: the language description is generated from the ground-truth action chunk by a template. Inference: the fine-tuned VLM generates the description, then the action tokens, autoregressively.](https://arxiv.org/html/2607.08974v1/clap_inv.png)
+![Training. A fixed template renders the ground-truth action chunk as a language description, and the VLM (Qwen3.5-0.8B / 2B / 4B) is fine-tuned to emit the description before the action tokens.](https://omron-sinicx.github.io/clap/train.png)
+
+At inference, the fine-tuned VLM generates both, the language prefix is stripped, and the integer tokens are decoded into an 8-step action chunk for open-loop execution.
+
+![Inference. The fine-tuned VLM generates the language description, then the action tokens, autoregressively.](https://omron-sinicx.github.io/clap/inference.png)
 
 ## Key results
 
-- **LIBERO, one training epoch, matched against VLA-0:** CLAP improves the average success rate by +13.5, +14.9, and +20.7 points at 0.8B, 2B, and 4B. 2B CLAP reaches 90.8% (VLA-0: 75.9%), outperforming 4B CLAP (84.9%) (Table 2).
-- **LIBERO-PRO (OOD):** unmasked CLAP raises average success over VLA-0 by +5.5, +11.1, and +10.9 points at 0.8B, 2B, and 4B. At 4B, on the Spatial suite with novel object instances, the gains are +42.6 points (unmasked) and +54.4 points (masked) (Table 4).
-- **Cost:** training takes a single epoch on one 8-GPU node, under 6.5 hours for every model size (Sec. 6). The prefix adds about 1.0 s per query (+32%) at inference (Appendix C).
+- **LIBERO, matched against VLA-0:** with the same Qwen3.5 backbones, data, and training budget, CLAP raises the average from 76.1% to 89.6% at 0.8B (+13.5 pt) and from 75.9% to 90.8% at 2B (+14.9 pt), with 4-5 hours of fine-tuning.
+- **Against robot-pretrained VLAs:** with no robot pretraining beyond LIBERO, 2B CLAP (90.8%) exceeds SmolVLA (88.8%) and OpenVLA (76.5%) on average.
+- **Real UR5e, 120 demonstrations:** 2B CLAP reaches 60% in-domain and keeps 60% with unseen distractor objects, while 0.8B drops from 35% to 10% (20 trials per condition).
 
-![Real-robot pick-and-place tasks with three training objects (carrot, cube, tomato) under randomized layouts. Out-of-distribution evaluation adds unseen distractor objects.](https://omron-sinicx.github.io/clap/real-robot-tasks.png)
+![Real-robot pick-and-place with three training objects (carrot, cube, tomato) under randomized layouts. Out-of-distribution trials add unseen distractors (silver watering can, orange toy car).](https://omron-sinicx.github.io/clap/real-robot-tasks.png)
 
 ## Conclusion
 
-A minimal recipe is enough to adapt a VLM into a VLA: change only the output representation, keep the backbone a standard VLM, and fine-tune for a single epoch. With no new modules or robot pretraining, the 0.8B/2B/4B family becomes a controlled testbed for studying how VLM capabilities transfer to robot control, and VLM-side advances such as quantization apply directly. In the authors' words, making VLA fine-tuning as lightweight and transparent as standard VLM fine-tuning is a necessary step toward bringing the VLM community's progress to robot learning.
+A VLA can stay anchored to its VLM's pretrained distribution and still emit executable numeric actions: a language-action prefix is enough, with no new modules or robot pretraining. Released as an open-weight family at several scales from a single VLM lineage, CLAP makes VLA fine-tuning as lightweight as VLM fine-tuning and gives a controlled testbed for how VLM capabilities transfer to robot control.
