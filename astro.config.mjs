@@ -4,6 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import { satteri } from '@astrojs/markdown-satteri';
 import { figurePlugin } from './plugins/figure.mjs';
 import { katexPlugin } from './plugins/katex.mjs';
+import { teacherPlugin } from './plugins/teacher.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,7 +15,7 @@ export default defineConfig({
     processor: satteri({
       features: { math: true },
       mdastPlugins: [figurePlugin],
-      hastPlugins: [katexPlugin],
+      hastPlugins: [katexPlugin, teacherPlugin],
     }),
   },
   fonts: [

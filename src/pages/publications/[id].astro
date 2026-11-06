@@ -311,6 +311,90 @@ const jsonLd = {
   .prose :global(blockquote p) {
     margin: 0;
   }
+  /* Result tables in the summary text. Scrolls sideways instead of overflowing the sheet. */
+  .prose :global(table) {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    margin: 10px 0 14px;
+    border-collapse: collapse;
+    font-size: var(--text-small);
+    line-height: 1.45;
+  }
+  .prose :global(th),
+  .prose :global(td) {
+    padding: 6px 12px 6px 0;
+    border-bottom: 1px solid var(--color-rule);
+    white-space: nowrap;
+    vertical-align: baseline;
+  }
+  .prose :global(th) {
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: var(--text-micro);
+    font-weight: 500;
+    color: var(--color-muted);
+    border-bottom-color: var(--color-border);
+  }
+  /* Right-aligned (`---:`) columns hold numbers. */
+  .prose :global(td[style*='right']),
+  .prose :global(th[style*='right']) {
+    font-family: var(--font-mono);
+    padding-left: 12px;
+  }
+  .prose :global(td strong) {
+    color: var(--color-accent);
+  }
+  /* Teacher VLM output examples ("> [!teacher 4B] prompt | note", plugins/teacher.mjs). */
+  .prose :global(blockquote.teacher) {
+    --teacher-bg: var(--color-teacher-large-bg);
+    --teacher-line: var(--color-teacher-large-line);
+    --teacher-fg: var(--color-teacher-large-fg);
+    margin: 10px 0;
+    padding: 10px 14px 11px;
+    border-left: 3px solid var(--teacher-line);
+    border-radius: 0 var(--radius-card) var(--radius-card) 0;
+    background: var(--teacher-bg);
+    font-size: var(--text-small);
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: normal;
+    color: var(--color-body);
+  }
+  .prose :global(blockquote.teacher-small) {
+    --teacher-bg: var(--color-teacher-small-bg);
+    --teacher-line: var(--color-teacher-small-line);
+    --teacher-fg: var(--color-teacher-small-fg);
+  }
+  .prose :global(blockquote.teacher p + p) {
+    margin-top: 4px;
+  }
+  .prose :global(blockquote.teacher strong) {
+    color: var(--teacher-fg);
+    font-weight: 600;
+  }
+  .prose :global(.teacher-label) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 8px;
+    font-family: var(--font-mono);
+    font-size: var(--text-micro);
+  }
+  .prose :global(.teacher-label .model) {
+    padding: 1px 7px;
+    border-radius: var(--radius-pill);
+    background: var(--teacher-fg);
+    color: var(--color-surface);
+    font-weight: 500;
+  }
+  .prose :global(.teacher-label .prompt) {
+    color: var(--teacher-fg);
+    font-weight: 500;
+  }
+  .prose :global(.teacher-label .note) {
+    color: var(--color-muted);
+  }
   .prose :global(strong) {
     color: var(--color-fg);
   }

@@ -35,6 +35,14 @@
   --color-venue-bg: #fce9de;
   --color-venue-fg: #9a3412;
 
+  /* Teacher examples in summaries (0.8B vs 4B teacher VLM), after the CALM poster */
+  --color-teacher-small-bg: #fdf1ea;
+  --color-teacher-small-line: #e9a27f;
+  --color-teacher-small-fg: #9a3412;
+  --color-teacher-large-bg: #ebf4f1;
+  --color-teacher-large-line: #7fb3a5;
+  --color-teacher-large-fg: #2f6b5e;
+
   /* Shape */
   --radius-card: 4px;
   --radius-tag: 2px;
