@@ -3,10 +3,10 @@ paper: clap
 tldr: CLAP turns a pretrained VLM into a VLA by prepending a natural-language action plan to each numeric action chunk, with no architectural change. 2B CLAP reaches 90.8% on LIBERO (+14.9 pt over VLA-0).
 demos:
   - url: https://omron-sinicx.github.io/clap/2b_in.gif
-    caption: "In-distribution rollout of CLAP (2B): \"grasp carrot and drop it onto the plate\"."
+    caption: 'In-distribution rollout of CLAP (2B): "grasp carrot and drop it onto the plate".'
   - url: https://omron-sinicx.github.io/clap/2b_ood.gif
-    caption: "Out-of-distribution rollout of CLAP (2B), with unseen distractors: \"pick up tomato and place it on the plate\"."
-reviewed: false
+    caption: 'Out-of-distribution rollout of CLAP (2B), with unseen distractors: "pick up tomato and place it on the plate".'
+reviewed: true
 ---
 
 ## Motivation
