@@ -1,0 +1,103 @@
+---
+/**
+ * Paper award label. Best paper awards get the gold trophy badge; other awards
+ * (honorable mentions, popular choice, ...) stay a soft venue chip.
+ */
+import Chip from './Chip.astro';
+
+interface Props {
+  award: string;
+  /** Page announcing the award; the badge becomes a link when set. */
+  href?: string;
+  size?: 'sm' | 'md';
+}
+const { award, href, size = 'md' } = Astro.props;
+const Tag = href ? 'a' : 'span';
+const linkAttrs = href ? { href, rel: 'noopener', title: `${award} (announcement)` } : {};
+const best = /best\s+paper/i.test(award);
+---
+
+{
+  best ? (
+    <Tag class:list={['award', size]} {...linkAttrs}>
+      <span class="trophy" aria-hidden="true">🏆</span>
+      <span class="label">{award}</span>
+      {href && <span class="arrow" aria-hidden="true">↗</span>}
+    </Tag>
+  ) : href ? (
+    <a class="plain" href={href} rel="noopener"><Chip variant="venue">{award} ↗</Chip></a>
+  ) : (
+    <Chip variant="venue">{award}</Chip>
+  )
+}
+
+<style>
+  .award {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    overflow: hidden;
+    padding: 3px 11px 3px 7px;
+    border: 1px solid var(--color-award-line);
+    border-radius: var(--radius-pill);
+    background: linear-gradient(135deg, var(--color-award-bg) 0%, var(--color-award-bg-deep) 55%, var(--color-award-bg) 100%);
+    box-shadow:
+      inset 0 1px 0 var(--color-award-sheen),
+      var(--shadow-card);
+    color: var(--color-award-fg);
+    font-family: var(--font-mono);
+    font-size: var(--text-micro);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  a.award:hover {
+    border-color: var(--color-award-fg);
+  }
+  a.award:hover .label {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .arrow {
+    letter-spacing: 0;
+  }
+  .trophy {
+    font-size: var(--text-small);
+    line-height: 1;
+    letter-spacing: 0;
+  }
+  .sm {
+    gap: 5px;
+    padding: 1px 9px 1px 6px;
+  }
+  .sm .trophy {
+    font-size: var(--text-chip);
+  }
+
+  /* One light sweep across the metal, like a medal catching the light. */
+  .award::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 35%, var(--color-award-sheen) 50%, transparent 65%);
+    transform: translateX(-120%);
+    pointer-events: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .award::after {
+      animation: sheen 1.4s ease-out 0.5s 1 both;
+    }
+    .award:hover::after,
+    :global(.row:hover) .award::after {
+      animation: sheen 0.9s ease-out 1 both;
+    }
+  }
+  @keyframes sheen {
+    to {
+      transform: translateX(120%);
+    }
+  }
+</style>

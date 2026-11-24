@@ -6,6 +6,7 @@ import 'katex/dist/katex.min.css';
 import Base from '../../layouts/Base.astro';
 import AuthorList from '../../components/AuthorList.astro';
 import BibtexBlock from '../../components/BibtexBlock.astro';
+import AwardBadge from '../../components/AwardBadge.astro';
 import Chip from '../../components/Chip.astro';
 import ExternalLink from '../../components/ExternalLink.astro';
 import Icon from '../../components/Icon.astro';
@@ -27,7 +28,7 @@ interface Props {
   paper: Paper;
 }
 const { paper } = Astro.props;
-const { title, venue, abbrev, year, award, teaser, teaserUrl, teaserWidth, links, arxiv, related } = paper.data;
+const { title, venue, abbrev, year, award, awardUrl, teaser, teaserUrl, teaserWidth, links, arxiv, related } = paper.data;
 const authors = await resolveAuthors(paper);
 const summary = await getSummary(paper.id);
 const Content = summary ? (await render(summary)).Content : undefined;
@@ -64,7 +65,7 @@ const jsonLd = {
         <div class="venue">
           <span title={venue}><Chip variant="accent">{abbrev}</Chip></span>
           <span class="mono">{venue} · {year}</span>
-          {award && <Chip variant="venue">{award}</Chip>}
+          {award && <AwardBadge award={award} href={awardUrl} />}
         </div>
         <h1 style={`view-transition-name: pub-title-${paper.id}`}>{title}</h1>
         <p class="authors"><AuthorList authors={authors} daggerNote={paper.data.daggerNote} daggerMark={paper.data.daggerMark} /></p>

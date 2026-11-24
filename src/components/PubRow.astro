@@ -1,5 +1,6 @@
 ---
 import AuthorList from './AuthorList.astro';
+import AwardBadge from './AwardBadge.astro';
 import Chip from './Chip.astro';
 import PosterModal from './PosterModal.astro';
 import { resolveAuthors, type Paper } from '../lib/papers';
@@ -8,7 +9,9 @@ interface Props {
   paper: Paper;
 }
 const { paper } = Astro.props;
-const { title, year, abbrev, venue, links } = paper.data;
+const { title, year, abbrev, venue, award, awardUrl, links } = paper.data;
+// Only best paper awards are called out in the list; other awards stay on the detail page.
+const bestAward = award && /best\s+paper/i.test(award) ? award : undefined;
 const authors = await resolveAuthors(paper);
 ---
 
@@ -18,7 +21,11 @@ const authors = await resolveAuthors(paper);
 <div class="row" data-pub={paper.id}>
   <span class="year mono">{year}</span>
   <div class="main">
-    <a class="title" href={`/publications/${paper.id}/`} data-pub-title>{title}</a>
+    <!-- The morph target is this block, not the inline title: a wrapped inline box cannot take a view-transition-name. -->
+    <div class="head" data-pub-title>
+      <a class="title" href={`/publications/${paper.id}/`}>{title}</a>
+      {bestAward && <span class="award"><AwardBadge award={bestAward} href={awardUrl} size="sm" /></span>}
+    </div>
     <div class="authors"><AuthorList authors={authors} daggerNote={paper.data.daggerNote} daggerMark={paper.data.daggerMark} compact /></div>
   </div>
   <div class="side">
@@ -56,9 +63,11 @@ const authors = await resolveAuthors(paper);
   .main {
     grid-area: main;
   }
-  .title {
-    display: block;
+  .head {
     width: fit-content;
+  }
+  .title {
+    display: inline;
     font-size: var(--text-row);
     line-height: 1.5;
     font-weight: 500;
@@ -69,6 +78,12 @@ const authors = await resolveAuthors(paper);
     color: var(--color-muted);
     margin-top: 3px;
     line-height: 1.5;
+  }
+  /* Badge sits right after the title text and wraps with it. */
+  .award {
+    display: inline-block;
+    margin-left: 8px;
+    vertical-align: 1px;
   }
   .side {
     grid-area: side;

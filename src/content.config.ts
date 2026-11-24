@@ -73,6 +73,8 @@ const papers = defineCollection({
       number: z.string().optional(),
       pages: z.string().optional(),
       award: z.string().optional(),
+      /** Page that announces the award, linked from the award badge. */
+      awardUrl: z.url().optional(),
       /** Local teaser (optimized at build) or a remote URL, e.g. from the project page. */
       teaser: image().optional(),
       teaserUrl: z.url().optional(),

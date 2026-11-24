@@ -35,6 +35,13 @@
   --color-venue-bg: #fce9de;
   --color-venue-fg: #9a3412;
 
+  /* Award badge (best paper): brushed gold */
+  --color-award-bg: #fdf5df;
+  --color-award-bg-deep: #f4dc9a;
+  --color-award-line: #dcb655;
+  --color-award-fg: #6f4704;
+  --color-award-sheen: rgb(255 255 255 / 0.75);
+
   /* Teacher examples in summaries (0.8B vs 4B teacher VLM), after the CALM poster */
   --color-teacher-small-bg: #fdf1ea;
   --color-teacher-small-line: #e9a27f;
